@@ -1,0 +1,5 @@
+[plugin]
+package = "pretix-withdrawal"
+modules = [ "pretix_withdrawal" ]
+marketplace_name = "withdrawal"
+

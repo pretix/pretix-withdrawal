@@ -1,0 +1,42 @@
+[project]
+name = "pretix-withdrawal"
+dynamic = ["version"]
+description = "Add support to withdraw from purchases"
+readme = "README.rst"
+license = {text = "pretix Enterprise"}
+keywords = ["pretix"]
+authors = [
+    {name = "pretix team", email = "support@pretix.eu"},
+]
+maintainers = [
+    {name = "pretix team", email = "support@pretix.eu"},
+]
+
+dependencies = [
+]
+
+[project.entry-points."pretix.plugin"]
+pretix_withdrawal = "pretix_withdrawal:PretixPluginMeta"
+
+[project.entry-points."distutils.commands"]
+build = "pretix_plugin_build.build:CustomBuild"
+
+[build-system]
+requires = [
+    "setuptools",
+    "pretix-plugin-build",
+]
+
+[project.urls]
+homepage = "ssh://git@code.rami.io:10022/pretix/pretix-withdrawal.git"
+repository = "ssh://git@code.rami.io:10022/pretix/pretix-withdrawal.git"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.dynamic]
+version = {attr = "pretix_withdrawal.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["pretix*"]
+namespaces = false
