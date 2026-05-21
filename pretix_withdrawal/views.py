@@ -364,13 +364,16 @@ class OrganizerSettingsView(OrganizerSettingsFormView):
             },
         )
 
-class EventSettingsView(EventSettingsViewMixin, EventPermissionRequiredMixin, TemplateView):
-    template_name = 'pretix_withdrawal/control/event_settings.html'
-    permission = 'event.settings.general:write'
+
+class EventSettingsView(
+    EventSettingsViewMixin, EventPermissionRequiredMixin, TemplateView
+):
+    template_name = "pretix_withdrawal/control/event_settings.html"
+    permission = "event.settings.general:write"
 
     def get_context_data(self, *args, **kwargs) -> dict:
         context = super().get_context_data(*args, **kwargs)
-        context['organizer_settings_url'] = reverse(
+        context["organizer_settings_url"] = reverse(
             "plugins:pretix_withdrawal:control.organizer.settings",
             kwargs={
                 "organizer": self.request.organizer.slug,

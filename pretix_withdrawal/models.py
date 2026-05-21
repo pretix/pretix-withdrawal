@@ -174,7 +174,9 @@ class Withdrawal(LoggedModel):
             url=url,
         )
         notification.add_action(_("View withdrawal"), url)
-        notification.add_attribute(_("From"), "%s (%s)" % (self.name, self.email) if self.name else self.email)
+        notification.add_attribute(
+            _("From"), "%s (%s)" % (self.name, self.email) if self.name else self.email
+        )
         if self.order:
             notification.add_attribute(_("Order"), self.order.code)
             notification.add_action(
