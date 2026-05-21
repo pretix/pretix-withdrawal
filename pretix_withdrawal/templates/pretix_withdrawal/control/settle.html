@@ -1,0 +1,112 @@
+{% extends basetemplate %}
+{% load i18n %}
+{% load icon %}
+{% load locale %}
+{% load bootstrap3 %}
+
+{% block title %}{% trans "Withdrawals" %}{% endblock %}
+{% block content %}
+    <h2>
+        {% trans "Mark withdrawal as settled" %}
+    </h2>
+    <p>{% blocktrans trimmed %}
+        Do you really want to mark this withdrawal as settled?
+    {% endblocktrans %}</p>
+    {% if warn_order_cancel %}
+        <div class="alert alert-warning">
+            <p>
+                <b>{% blocktrans trimmed %}The order this withdrawal is linked to, is not canceled yet!{% endblocktrans %}</b><br>
+                {% blocktrans trimmed %}Please make sure that you have canceled the order or parts of it manually through the order page before marking a withdrawal settled.{% endblocktrans %}
+            </p>
+        </div>
+    {% endif %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                {% trans "Details" %}
+            </h3>
+        </div>
+        <div class="panel-body">
+            <dl class="dl-horizontal">
+                <dt>{% trans "Received" %}</dt>
+                <dd>{{ withdrawal.created }}</dd>
+                <dt>{% trans "Name" %}</dt>
+                <dd>{{ withdrawal.name }}</dd>
+                <dt>{% trans "Email" %}</dt>
+                <dd>{{ withdrawal.email }}</dd>
+
+                <dt>{% trans "Order" %}</dt>
+                <dd>
+                    {% if withdrawal.order %}
+                        <a href="{% url "control:event.order" event=withdrawal.order.event.slug organizer=withdrawal.order.event.organizer.slug code=withdrawal.order.code %}">
+                            {% if request.event %}
+                                {{ withdrawal.order.code }}
+                            {% else %}
+                                {{ withdrawal.order.full_code }}
+                            {% endif %}
+                        </a>
+                        {% if withdrawal.email != withdrawal.order.email %}
+                            {% if '@' in withdrawal.order.email %}
+                                <br>
+                                <small class="text-muted">
+                                    {{ withdrawal.order.email }}
+                                </small>
+                            {% endif %}
+                            <br>
+                            <small class="text-danger">
+                                {% icon "exclamation-triangle" %}
+                                {% if '@' not in withdrawal.order.email %}
+                                    {% trans "Beware: order has no email - withdrawal might be from a different email than the order!" %}
+                                {% else %}
+                                    {% trans "Beware: withdrawal is from a different email than the order!" %}
+                                {% endif %}
+                            </small>
+                        {% endif %}
+                    {% else %}
+                        <b>{{ withdrawal.order_code }}</b>
+                        {% if request.event %}
+                            <a href="{% url "control:event.orders" event=request.event.slug organizer=request.organizer.slug %}?query={{ withdrawal.order_code }}" class="text-muted" data-toggle="tooltip" title="{% trans "The provided order-code could not be matched to any existing order. Click here to try a search." %}">
+                                {% icon "question-circle" %}
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                </dd>
+                {% if not request.event %}
+                    <dt>{% trans "Event" %}</dt>
+                    <dd>
+                        {% if withdrawal.event %}
+                            <a href="{% url "plugins:pretix_withdrawal:control.event.index" event=withdrawal.event.slug organizer=withdrawal.organizer.slug %}">
+                                {{ withdrawal.event }}
+                            </a>
+                        {% else %}
+                            {% trans "unknown" %}
+                        {% endif %}
+                    </dd>
+                {% endif %}
+                <dt>{% trans "Customer reference" %}<br><span class="text-muted font-normal">{{ withdrawal.locale|human_readable_locale }}</span></dt>
+                <dd lang="{{ withdrawal.locale }}">{{ withdrawal.message|default:"–"|linebreaksbr }}</dd>
+                <dt>{% trans "Internal comment" %}<br><span class="text-muted font-normal">{{ withdrawal.locale|human_readable_locale }}</span></dt>
+                <dd>{{ withdrawal.internal_notes|default:"–"|linebreaksbr }}</dd>
+            </dl>
+        </div>
+    </div>
+
+    <form method="post" href="">
+        {% csrf_token %}
+        <div class="form-group submit-group">
+            {% if request.event %}
+                {% url "plugins:pretix_withdrawal:control.event.view" pk=withdrawal.pk event=withdrawal.event.slug organizer=withdrawal.organizer.slug as withdrawal_url %}
+            {% else %}
+                {% url "plugins:pretix_withdrawal:control.organizer.view" pk=withdrawal.pk organizer=withdrawal.organizer.slug as withdrawal_url %}
+            {% endif %}
+            <a class="btn btn-default btn-lg"
+                    href="{{ withdrawal_url }}">
+                {% trans "Cancel" %}
+            </a>
+            <button class="btn btn-primary btn-save btn-lg" type="submit">
+                {% trans "Yes, mark as settled" %}
+            </button>
+            <div class="clearfix"></div>
+        </div>
+    </form>
+{% endblock %}

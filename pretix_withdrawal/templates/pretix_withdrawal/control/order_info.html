@@ -1,0 +1,50 @@
+{% load i18n %}
+{% load icon %}
+{% load locale %}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            {% trans "Withdrawal" %}
+        </h3>
+    </div>
+    <div class="panel-body">
+        {% for w in withdrawals %}
+            {% if not forloop.first %}
+                <hr>
+            {% endif %}
+            {% url "plugins:pretix_withdrawal:control.event.view" event=request.event.slug organizer=request.organizer.slug pk=w.pk as withdrawal_url %}
+            <dl class="dl-horizontal">
+                <dt>{% trans "Received" %}</dt>
+                <dd>{{ w.created }}</dd>
+                <dt>{% trans "Settled" %}</dt>
+                <dd>{% if w.settled %}{{ w.settled }}{% else %}<span class="label label-warning">{% trans "Not settled" %}</span>{% endif %}<br><br></dd>
+                <dt>{% trans "Name" %}</dt>
+                <dd>{{ w.name }}</dd>
+                <dt>{% trans "Email" %}</dt>
+                <dd>
+                    {{ w.email }}
+                    {% if w.email != w.order.email %}
+                        <br>
+                        <small class="text-danger">
+                            {% icon "exclamation-triangle" %}
+                            {% if '@' not in w.order.email %}
+                                {% trans "Beware: order has no email - withdrawal might be from a different email than the order!" %}
+                            {% else %}
+                                {% trans "Beware: withdrawal is from a different email than the order!" %}
+                            {% endif %}
+                        </small>
+                    {% endif %}
+                </dd>
+                <dt>{% trans "Locale" %}</dt>
+                <dd>{{ w.locale|human_readable_locale }}</dd>
+
+                <dt>{% trans "Message" %}</dt>
+                <dd>{{ w.message|default:"–"|linebreaksbr }}</dd>
+                <dt>{% trans "Internal comment" %}</dt>
+                <dd>{{ w.internal_notes|default:"–"|linebreaksbr }}</dd>
+            </dl>
+            <a href="{{ withdrawal_url }}" class="btn btn-default">{% trans "View details" %}</a>
+        {% endfor %}
+    </div>
+</div>

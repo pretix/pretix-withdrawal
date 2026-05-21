@@ -1,0 +1,30 @@
+{% extends basetemplate %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block title %}{% trans "Withdraw from contract" %}{% endblock %}
+{% block content %}
+
+    <h2>{% trans "Withdraw from contract" %}</h2>
+    <form action="" method="post" class="form-horizontal blank-after">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-xs-12">
+                <p>{% trans "Please fill out the form below to withdraw from your order." %}</p>
+                {% bootstrap_field form.name layout="checkout" %}
+                {% bootstrap_field form.email layout="checkout" %}
+                {% bootstrap_field form.order_code layout="checkout" %}
+                {% bootstrap_field form.message layout="checkout" %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-8 col-xs-12">
+                <button class="btn btn-block btn-primary btn-lg" type="submit">
+                    {% trans "Confirm withdrawal" %}
+                </button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </form>
+    <p>&nbsp;</p>
+{% endblock %}

@@ -1,12 +1,18 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-21 09:25+0200\n"
-"PO-Revision-Date: \n"
-"Last-Translator: pretix team\n"
-"Language-Team: \n"
-"Language: de\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,23 +23,21 @@ msgstr ""
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:10
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:8
 msgid "Withdrawal"
-msgstr "Widerruf"
+msgstr ""
 
 #: pretix_withdrawal/apps.py:21
 msgid ""
 "Add support to withdraw from pretix online purchases to comply with EU "
 "legislation."
 msgstr ""
-"Erlaubt es Kunden, Online-Käufe in pretix zu widerrufen, um EU-Vorgaben zu "
-"erfüllen."
 
 #: pretix_withdrawal/apps.py:30 pretix_withdrawal/apps.py:35
 msgid "Settings"
-msgstr "Einstellungen"
+msgstr ""
 
 #: pretix_withdrawal/apps.py:42
 msgid "Orders"
-msgstr "Bestellungen"
+msgstr ""
 
 #: pretix_withdrawal/apps.py:42 pretix_withdrawal/apps.py:47
 #: pretix_withdrawal/signals.py:91 pretix_withdrawal/signals.py:113
@@ -41,151 +45,145 @@ msgstr "Bestellungen"
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:9
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:7
 msgid "Withdrawals"
-msgstr "Widerrufe"
+msgstr ""
 
 #: pretix_withdrawal/forms.py:39
 msgid "Email address"
-msgstr "E-Mail-Adresse"
+msgstr ""
 
 #: pretix_withdrawal/forms.py:43
 msgid ""
 "If we receive a withdrawal, we will notify you on this email address. You "
 "can specify multiple recipients separated by commas."
 msgstr ""
-"Sobald ein Widerruf eingeht, schicken wir eine Benachrichtigung an diese E-"
-"Mail-Adresse. Du kannst mehrere Adressen mit Komma getrennt angeben."
 
 #: pretix_withdrawal/forms.py:48
 msgid ""
 "Message shown to the user after submitting the form to withdraw from an order"
 msgstr ""
-"Meldung, die dem Kunden/der Kundin angezeigt wird, nachdem das "
-"Widerrufsformular abgeschickt wurde."
 
 #: pretix_withdrawal/forms.py:55 pretix_withdrawal/forms.py:67
 msgid "Subject"
-msgstr "Betreff"
+msgstr ""
 
 #: pretix_withdrawal/forms.py:61 pretix_withdrawal/forms.py:73
 msgid "Body"
-msgstr "Inhalt"
+msgstr ""
 
 #: pretix_withdrawal/forms.py:89 pretix_withdrawal/forms.py:113
 #, python-brace-format
 msgid "Available placeholders: {list}"
-msgstr "Verfügbare Platzhalter: {list}"
+msgstr ""
 
 #: pretix_withdrawal/forms.py:101
 #, python-brace-format
 msgid "Available placeholders: {list}. Note that {empty} can be empty."
-msgstr "Verfügbare Platzhalter: {list}. Beachte, dass {empty} leer sein kann."
+msgstr ""
 
 #: pretix_withdrawal/forms.py:118 pretix_withdrawal/forms.py:121
 msgid "Search for…"
-msgstr "Suche nach …"
+msgstr ""
 
 #: pretix_withdrawal/forms.py:127
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:55
 msgid "Status"
-msgstr "Status"
+msgstr ""
 
 #: pretix_withdrawal/forms.py:129
 msgid "All withdrawals"
-msgstr "Alle Widerrufe"
+msgstr ""
 
 #: pretix_withdrawal/forms.py:130
 msgid "settled"
-msgstr "erledigt"
+msgstr ""
 
 #: pretix_withdrawal/forms.py:131
 msgid "not settled"
-msgstr "nicht erledigt"
+msgstr ""
 
 #: pretix_withdrawal/models.py:49
 msgid "Order code"
-msgstr "Bestellnummer"
+msgstr ""
 
 #: pretix_withdrawal/models.py:51
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:32
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:24
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:35
 msgid "Email"
-msgstr "E-Mail"
+msgstr ""
 
 #: pretix_withdrawal/models.py:52
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:30
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:22
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:33
 msgid "Name"
-msgstr "Name"
+msgstr ""
 
 #: pretix_withdrawal/models.py:54 pretix_withdrawal/models.py:198
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:76
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:42
 msgid "Message"
-msgstr "Nachricht"
+msgstr ""
 
 #: pretix_withdrawal/models.py:58
 msgid ""
 "Do you want to withdraw part of your order? Please specify here which items "
 "you want to cancel."
 msgstr ""
-"Willst Du nur einen Teil Deiner Bestellung widerrufen? Gib bitte hier an, "
-"welche Positionen Du widerrufen möchtest."
 
 #: pretix_withdrawal/models.py:62
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:34
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:39
 msgid "Locale"
-msgstr "Sprache"
+msgstr ""
 
 #: pretix_withdrawal/models.py:66
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:82
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:44
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:88
 msgid "Internal comment"
-msgstr "Interner Kommentar"
+msgstr ""
 
 #: pretix_withdrawal/models.py:173
 #, python-brace-format
 msgid "Withdrawal for {order}"
-msgstr "Widerruf für {order}"
+msgstr ""
 
 #: pretix_withdrawal/models.py:176
 msgid "View withdrawal"
-msgstr "Widerruf ansehen"
+msgstr ""
 
 #: pretix_withdrawal/models.py:177
 msgid "From"
-msgstr "Von"
+msgstr ""
 
 #: pretix_withdrawal/models.py:179
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:37
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:50
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:38
 msgid "Order"
-msgstr "Bestellung"
+msgstr ""
 
 #: pretix_withdrawal/models.py:181
 msgid "View order"
-msgstr "Bestellung ansehen"
+msgstr ""
 
 #: pretix_withdrawal/models.py:193
 msgid "Order (code unknown)"
-msgstr "Bestellnummer (unbekannt)"
+msgstr ""
 
 #: pretix_withdrawal/models.py:196
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:74
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:52
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:75
 msgid "Event"
-msgstr "Veranstaltung"
+msgstr ""
 
 #: pretix_withdrawal/signals.py:52
 #: pretix_withdrawal/templates/pretix_withdrawal/presale_form.html:5
 #: pretix_withdrawal/templates/pretix_withdrawal/presale_form.html:8
 msgid "Withdraw from contract"
-msgstr "Vertrag widerrufen"
+msgstr ""
 
 #: pretix_withdrawal/signals.py:138
 #, python-brace-format
@@ -195,15 +193,10 @@ msgid ""
 "be conducted in a separate step by our customer service team. We will get "
 "back to you shortly."
 msgstr ""
-"Wir haben Deine Widerrufserklärung erhalten. Wir senden eine E-Mail an "
-"{email}, um den Eingang Deines Widerrufs zu bestätigen. Die Prüfung der "
-"rechtlichen Wirksamkeit und Reichweite Deines Widerrufs erfolgt in einem "
-"separaten Schritt durch unseren Kundenservice. Wir werden uns in Kürze bei "
-"Dir melden."
 
 #: pretix_withdrawal/signals.py:148
 msgid "Your withdrawal"
-msgstr "Dein Widerruf"
+msgstr ""
 
 #: pretix_withdrawal/signals.py:155
 #, python-brace-format
@@ -226,28 +219,10 @@ msgid ""
 "Best regards,  \n"
 "Your {organizer} team"
 msgstr ""
-"Guten Tag,\n"
-"\n"
-"vielen Dank für Deine Widerrufserklärung.\n"
-"\n"
-"- Datum und Uhrzeit: {created}\n"
-"- Name: {name}\n"
-"- Bestellung: {code}\n"
-"\n"
-"Dein Widerrufsrecht wird derzeit geprüft. Bitte beachte, dass diese E-Mail "
-"lediglich den\n"
-"Eingang Deiner Erklärung bestätigt. Die Prüfung der rechtlichen Wirksamkeit "
-"und Reichweite\n"
-"erfolgt in einem separaten Schritt durch unseren Kundenservice. Wir werden "
-"uns in Kürze\n"
-"erneut bei Dir melden.\n"
-"\n"
-"Viele Grüße,  \n"
-"Das {organizer} Team"
 
 #: pretix_withdrawal/signals.py:174
 msgid "We received a withdrawal for your order"
-msgstr "Wir haben einen Widerruf für Deine Bestellung erhalten"
+msgstr ""
 
 #: pretix_withdrawal/signals.py:182
 #, python-brace-format
@@ -262,42 +237,32 @@ msgid ""
 "Best regards,  \n"
 "Your {organizer} team"
 msgstr ""
-"Hallo,\n"
-"\n"
-"wir haben einen Widerruf für Deine Bestellung {code} in der Veranstaltung "
-"{event} von einer abweichenden E-Mail-Adresse erhalten.\n"
-"\n"
-"Wenn Du diesen Widerruf nicht veranlasst hast, kontaktiere uns bitte "
-"umgehend.\n"
-"\n"
-"Viele Grüße,  \n"
-"Das {organizer} Team"
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:12
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:28
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:136
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:21
 msgid "Not settled"
-msgstr "Nicht erledigt"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:14
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:27
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:138
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:20
 msgid "Settled"
-msgstr "Erledigt"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:20
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:26
 msgid "Details"
-msgstr "Details"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:25
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:54
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:18
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:31
 msgid "Received"
-msgstr "Empfangen"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:58
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:107
@@ -307,8 +272,6 @@ msgid ""
 "Beware: order has no email - withdrawal might be from a different email than "
 "the order!"
 msgstr ""
-"Achtung: die Bestellung wurde anonymisiert. Die E-Mail-Adresse des Widerrufs "
-"könnte sich von der Bestell-E-Mail unterscheiden!"
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:60
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:109
@@ -316,8 +279,6 @@ msgstr ""
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:61
 msgid "Beware: withdrawal is from a different email than the order!"
 msgstr ""
-"Achtung: Die E-Mail-Adresse des Widerrufs unterscheidet sich von der Bestell-"
-"E-Mail!"
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:67
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:116
@@ -326,48 +287,46 @@ msgid ""
 "The provided order-code could not be matched to any existing order. Click "
 "here to try a search."
 msgstr ""
-"Die eingegebene Bestellnummer konnte keiner Bestellung zugeordnet werden. "
-"Klicke hier, um eine Suche zu starten."
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:81
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:82
 msgid "unknown"
-msgstr "unbekannt"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:91
 msgid "Comments"
-msgstr "Kommentare"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:96
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:86
 msgid "Customer reference"
-msgstr "Hinweise des Kunden/der Kundin"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:112
 msgid "Update comment"
-msgstr "Kommentar speichern"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:129
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:151
 msgid "Mark as settled"
-msgstr "Als erledigt markieren"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/event_settings.html:5
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:5
 msgid "Withdrawal settings"
-msgstr "Einstellungen Widerruf"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/event_settings.html:7
 msgid "Settings for withdrawals can only be changed for the whole organizer."
-msgstr "Einstellungen für Widerrufe können nur für den Veranstalter insgesamt verändert werden."
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/event_settings.html:9
 msgid "See organizer’s settings"
-msgstr "Einstellungen des Veranstalters ansehen"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:13
 msgid "No withdrawals to act upon."
-msgstr "Keine Widerrufe, die bearbeitet werden müssen."
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:21
 #, python-format
@@ -375,101 +334,91 @@ msgid ""
 "You might want to <a href=\"%(url)s\">check withdrawals that could not be "
 "matched to an event</a>."
 msgstr ""
-"Prüfe bitte auch <a href=\"%(url)s\">Widerrufe, die keiner Veranstaltung "
-"zugeordnet werden konnten</a>."
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:39
 msgid "Filter"
-msgstr "Filtern"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:49
 msgid "Customer"
-msgstr "Kunde"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:56
 msgid "Actions"
-msgstr "Aktionen"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:47
 msgid "View details"
-msgstr "Details ansehen"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:10
 msgid "General"
-msgstr "Allgemein"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:15
 msgid "Email sent to the user who issued the withdrawal"
-msgstr "E-Mail an den Widerrufenden"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:20
 msgid "Email sent to the order's email"
-msgstr "E-Mail an den Bestellenden"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:21
 msgid ""
 "If the withdrawal and the order are based on different email addresses, we "
 "will send an email to the order's email address as well."
 msgstr ""
-"Wenn Widerruf und Bestellung von unterschiedlichen E-Mail-Adressen ausgelöst "
-"wurden, schicken wir diese E-Mail an den/die Besteller*in."
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:28
 msgid "Save"
-msgstr "Speichern"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:10
 msgid "Mark withdrawal as settled"
-msgstr "Markiere Widerruf als erledigt"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:12
 msgid "Do you really want to mark this withdrawal as settled?"
-msgstr "Möchtest Du diesen Widerruf wirklich als erledigt markieren?"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:18
 msgid "The order this withdrawal is linked to, is not canceled yet!"
 msgstr ""
-"Die Bestellung, der dieser Widerruf zugeordnet ist, ist noch nicht storniert!"
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:19
 msgid ""
 "Please make sure that you have canceled the order or parts of it manually "
 "through the order page before marking a withdrawal settled."
 msgstr ""
-"Bitte stelle sicher, dass die Bestellung oder Teile davon händisch über die "
-"Bestellseite storniert wurden, bevor Du den Widerruf als erledigt markierst."
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:104
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:107
 msgid "Yes, mark as settled"
-msgstr "Ja, als erledigt markieren"
+msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/presale_form.html:13
 msgid "Please fill out the form below to withdraw from your order."
 msgstr ""
-"Bitte fülle das untenstehende Formular aus, um Deinen Vertrag zu widerrufen."
 
 #: pretix_withdrawal/templates/pretix_withdrawal/presale_form.html:23
 msgid "Confirm withdrawal"
-msgstr "Widerruf bestätigen"
+msgstr ""
 
 #: pretix_withdrawal/views.py:94
 msgid "We could not save your changes. See below for details."
 msgstr ""
-"Wir konnten Deine Änderungen nicht speichern. Die fehlerhaften Felder sind "
-"farblich markiert."
 
 #: pretix_withdrawal/views.py:234
 msgid "The comment has been updated."
-msgstr "Der Kommentar wurde aktualisiert."
+msgstr ""
 
 #: pretix_withdrawal/views.py:236
 msgid "Could not update the comment."
-msgstr "Kommentar konnte nicht gespeichert werden."
+msgstr ""
 
 #: pretix_withdrawal/views.py:317
 msgid "The withdrawal is settled."
-msgstr "Der Widerruf ist erledigt."
+msgstr ""

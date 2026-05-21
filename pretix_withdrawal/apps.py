@@ -1,11 +1,12 @@
-from django.utils.translation import gettext_lazy
+from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
 from . import __version__
 
 try:
-    from pretix.base.plugins import PluginConfig
+    from pretix.base.plugins import PLUGIN_LEVEL_EVENT_ORGANIZER_HYBRID, PluginConfig
 except ImportError:
-    raise RuntimeError("Please use pretix 2.7 or above to run this plugin!")
+    raise RuntimeError("Please use pretix 2026.3.0 or above to run this plugin!")
 
 
 class PluginApp(PluginConfig):
@@ -14,15 +15,46 @@ class PluginApp(PluginConfig):
     verbose_name = "Withdrawal"
 
     class PretixPluginMeta:
-        name = gettext_lazy("Withdrawal")
+        name = _("Withdrawal")
         author = "pretix team"
-        description = gettext_lazy("Add support to withdraw from purchases")
+        description = _(
+            "Add support to withdraw from pretix online purchases to comply with EU legislation."
+        )
         visible = True
         version = __version__
         category = "FEATURE"
-        compatibility = "pretix>=2.7.0"
-        settings_links = []
-        navigation_links = []
+        compatibility = "pretix>=2026.3.0.dev0"
+        level = PLUGIN_LEVEL_EVENT_ORGANIZER_HYBRID
+        settings_links = [
+            (
+                (_("Settings"), _("Withdrawal")),
+                "plugins:pretix_withdrawal:control.organizer.settings",
+                {},
+            ),
+            (
+                (_("Settings"), _("Withdrawal")),
+                "plugins:pretix_withdrawal:control.event.settings",
+                {},
+            ),
+        ]
+        navigation_links = [
+            (
+                (_("Orders"), _("Withdrawals")),
+                "plugins:pretix_withdrawal:control.event.index",
+                {},
+            ),
+            (
+                (_("Withdrawals"),),
+                "plugins:pretix_withdrawal:control.organizer.index",
+                {},
+            ),
+        ]
 
     def ready(self):
         from . import signals  # NOQA
+
+    def is_available(self, target):
+        from pretix.base.models import Event
+
+        org = target.organizer if isinstance(target, Event) else target
+        return org.slug in ("demo",) or settings.DEBUG
