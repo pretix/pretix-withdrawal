@@ -1,0 +1,32 @@
+{% extends "pretixcontrol/organizers/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+{% block content %}
+    <h1>{% trans "Withdrawal settings" %}</h1>
+    <form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
+        {% bootstrap_form_errors form %}
+        {% csrf_token %}
+        <fieldset>
+            <legend>{% trans "General" %}</legend>
+            {% bootstrap_field form.withdrawal_contact_mail layout="horizontal" %}
+            {% bootstrap_field form.withdrawal_received_success_msg layout="horizontal" %}
+        </fieldset>
+        <fieldset>
+            <legend>{% trans "Email sent to the user who issued the withdrawal" %}</legend>
+            {% bootstrap_field form.withdrawal_received_mail_subject layout="horizontal" %}
+            {% bootstrap_field form.withdrawal_received_mail_body layout="horizontal" %}
+        </fieldset>
+        <fieldset>
+            <legend>{% trans "Email sent to the order's email" %}</legend>
+            <p>{% trans "If the withdrawal and the order are based on different email addresses, we will send an email to the order's email address as well." %}</p>
+            {% bootstrap_field form.withdrawal_warn_mail_subject layout="horizontal" %}
+            {% bootstrap_field form.withdrawal_warn_mail_body layout="horizontal" %}
+        </fieldset>
+
+        <div class="form-group submit-group">
+            <button type="submit" class="btn btn-primary btn-save">
+                {% trans "Save" %}
+            </button>
+        </div>
+    </form>
+{% endblock %}

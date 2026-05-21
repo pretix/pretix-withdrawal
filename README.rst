@@ -3,7 +3,11 @@ Withdrawal
 
 This is a plugin for `pretix`_. 
 
-Add support to withdraw from purchases
+To comply with EU legislation you need to add support the right of withdrawal for online purchases. This plugin adds 
+a visually distinct link in the footer of every page of the pretix-shop. This link leads to a form on organizer-level 
+to allow the customer to withdraw from an online purchase. When submitted, this form notifies the organizer (or any 
+team-member assigned through the pretix notification system) via email and creates a WithdrawalRequest accessible in 
+pretix-control.
 
 Development setup
 -----------------

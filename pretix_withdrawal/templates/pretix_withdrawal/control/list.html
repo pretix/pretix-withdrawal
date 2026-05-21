@@ -1,0 +1,165 @@
+{% extends basetemplate %}
+{% load i18n %}
+{% load icon %}
+{% load bootstrap3 %}
+
+{% block title %}{% trans "Withdrawals" %}{% endblock %}
+{% block content %}
+
+    <h2>{% trans "Withdrawals" %}</h2>
+    {% if not filter_form.filtered and withdrawals|length == 0 %}
+        <div class="empty-collection">
+            <p>
+                {% blocktrans trimmed %}
+                    No withdrawals to act upon.
+                {% endblocktrans %}
+            </p>
+        </div>
+        {% if request.event %}
+            {% url "plugins:pretix_withdrawal:control.organizer.index" organizer=request.organizer.slug as organizer_list_url %}
+            <p class="text-center">
+                {% blocktrans trimmed with url=organizer_list_url %}
+                    You might want to <a href="{{ url }}">check withdrawals that could not be matched to an event</a>.
+                {% endblocktrans %}
+            </p>
+        {% endif %}
+    {% else %}
+        <div class="row filter-form">
+            <form class="" action="" method="get">
+                <div class="col-md-2 col-xs-6">
+                    {% bootstrap_field filter_form.query layout='inline' %}
+                </div>
+                <div class="col-md-2 col-xs-6">
+                    {% bootstrap_field filter_form.status layout='inline' %}
+                </div>
+                <div class="col-md-2 col-xs-6">
+                    <button class="btn btn-primary btn-block" type="submit">
+                        <span class="fa fa-filter"></span>
+                        <span class="hidden-md">
+                            {% trans "Filter" %}
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover">
+                <thead>
+                <tr>
+                    <th>{% trans "Customer" %}</th>
+                    <th>{% trans "Order" %}</th>
+                    {% if not request.event %}
+                        <th>{% trans "Event" %}</th>
+                    {% endif %}
+                    <th>{% trans "Received" %}</th>
+                    <th class="text-right">{% trans "Status" %}</th>
+                    <th class="text-right">{% trans "Actions" %}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for w in withdrawals %}
+                    <tr>
+                        <td>
+                            {% if request.event %}
+                                {% url "plugins:pretix_withdrawal:control.event.view" event=request.event.slug organizer=request.organizer.slug pk=w.pk as withdrawal_url %}
+                            {% else %}
+                                {% url "plugins:pretix_withdrawal:control.organizer.view" organizer=request.organizer.slug pk=w.pk as withdrawal_url %}
+                            {% endif %}
+                            <a href="{{ withdrawal_url }}">
+                            {% if w.name %}
+                                {{ w.name }}<br><small>{{ w.email }}</small>
+                            {% else %}
+                                {{ w.email }}
+                            {% endif %}
+                            </a>
+                            {% if w.message %}
+                                <br><span data-toggle="tooltip" title="{% trans "Message" %}: {{ w.message|truncatechars:90 }}">{% icon "comment-o" %}</span>
+                            {% endif %}
+                            {% if w.internal_notes %}
+                                {% if not w.message %}
+                                    <br>
+                                {% endif %}
+                                <span data-toggle="tooltip" title="{% trans "Internal comment" %}: {{ w.internal_notes|truncatechars:90 }}">{% icon "sticky-note-o" %}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if w.order %}
+                                <b>
+                                    <a href="{% url "control:event.order" event=w.order.event.slug organizer=w.order.event.organizer.slug code=w.order.code %}">
+                                        {% if request.event %}
+                                            {{ w.order.code }}
+                                        {% else %}
+                                            {{ w.order.full_code }}
+                                        {% endif %}
+                                    </a>
+                                </b>
+                                {% if w.email != w.order.email %}
+                                    {% if '@' in w.order.email %}
+                                        <br>
+                                        <small class="text-muted">
+                                            {{ w.order.email }}
+                                        </small>
+                                    {% endif %}
+                                    <br>
+                                    <small class="text-danger">
+                                        {% icon "exclamation-triangle" %}
+                                        {% if '@' not in w.order.email %}
+                                            {% trans "Beware: order has no email - withdrawal might be from a different email than the order!" %}
+                                        {% else %}
+                                            {% trans "Beware: withdrawal is from a different email than the order!" %}
+                                        {% endif %}
+                                    </small>
+                                {% endif %}
+                            {% else %}
+                                <b>{{ w.order_code }}</b>
+                                {% if request.event %}
+                                    <a href="{% url "control:event.orders" event=request.event.slug organizer=request.organizer.slug %}?query={{ w.order_code }}" class="text-muted" data-toggle="tooltip" title="{% trans "The provided order-code could not be matched to any existing order. Click here to try a search." %}">
+                                        {% icon "question-circle" %}
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                        {% if not request.event %}
+                            <td>
+                                {% if w.event %}
+                                    <a href="{% url "plugins:pretix_withdrawal:control.event.index" event=w.event.slug organizer=w.organizer.slug %}">
+                                        {{ w.event }}
+                                    </a>
+                                {% endif %}
+                            </td>
+                        {% endif %}
+                        <td>
+                            {{ w.created }}
+                        </td>
+                        <td class="text-right">
+                            {% if not w.settled %}
+                                <span class="label label-warning">{% trans "Not settled" %}</span>
+                            {% else %}
+                                <span class="label label-success">{% trans "Settled" %}</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-right">
+                            {% if not w.settled %}
+                                {% if request.event %}
+                                    {% url "plugins:pretix_withdrawal:control.event.settle" event=request.event.slug organizer=request.organizer.slug pk=w.pk as mark_settled_url %}
+                                {% else %}
+                                    {% url "plugins:pretix_withdrawal:control.organizer.settle" organizer=request.organizer.slug pk=w.pk as mark_settled_url %}
+                                {% endif %}
+                                <a href="{{ mark_settled_url }}?next="
+                                   class="btn btn-primary btn-xs" data-toggle="tooltip">
+                                    <span class="fa fa-check"></span>
+                                    {% trans "Mark as settled" %}
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% include "pretixcontrol/pagination.html" %}
+    {% endif %}
+{% endblock %}
+
+
+
