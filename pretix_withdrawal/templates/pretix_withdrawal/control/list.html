@@ -7,6 +7,17 @@
 {% block content %}
 
     <h2>{% trans "Withdrawals" %}</h2>
+    {% if warn_global_withdrawals_url %}
+        <div class="alert alert-warning">
+            <p>
+                {% blocktrans trimmed %}
+                    There are <b>unsettled withdrawals not listed here</b> as they are not assigned to any event.
+                {% endblocktrans %}
+                <br>
+                <a href="{{ warn_global_withdrawals_url }}">{% trans "Check unassigned withdrawals" %}</a>
+            </p>
+        </div>
+    {% endif %}
     {% if not filter_form.filtered and withdrawals|length == 0 %}
         <div class="empty-collection">
             <p>
@@ -160,6 +171,3 @@
         {% include "pretixcontrol/pagination.html" %}
     {% endif %}
 {% endblock %}
-
-
-

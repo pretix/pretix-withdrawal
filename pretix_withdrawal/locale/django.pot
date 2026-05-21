@@ -85,7 +85,7 @@ msgid "Search for…"
 msgstr ""
 
 #: pretix_withdrawal/forms.py:127
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:55
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:66
 msgid "Status"
 msgstr ""
 
@@ -163,7 +163,7 @@ msgstr ""
 
 #: pretix_withdrawal/models.py:193
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:37
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:50
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:61
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:38
 msgid "Order"
 msgstr ""
@@ -178,7 +178,7 @@ msgstr ""
 
 #: pretix_withdrawal/models.py:210
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:74
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:52
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:63
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:75
 msgid "Event"
 msgstr ""
@@ -244,14 +244,14 @@ msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:12
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:28
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:136
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:147
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:21
 msgid "Not settled"
 msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:14
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:27
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:138
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:149
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:20
 msgid "Settled"
 msgstr ""
@@ -262,14 +262,14 @@ msgid "Details"
 msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:25
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:54
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:65
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:18
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:31
 msgid "Received"
 msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:58
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:107
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:118
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:32
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:59
 msgid ""
@@ -278,14 +278,14 @@ msgid ""
 msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:60
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:109
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:120
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:34
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:61
 msgid "Beware: withdrawal is from a different email than the order!"
 msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:67
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:116
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:127
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:68
 msgid ""
 "The provided order-code could not be matched to any existing order. Click "
@@ -311,7 +311,7 @@ msgid "Update comment"
 msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:129
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:151
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:162
 msgid "Mark as settled"
 msgstr ""
 
@@ -329,25 +329,35 @@ msgid "See organizer’s settings"
 msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:13
+msgid ""
+"There are <b>unsettled withdrawals not listed here</b> as they are not "
+"assigned to any event."
+msgstr ""
+
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:17
+msgid "Check unassigned withdrawals"
+msgstr ""
+
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:24
 msgid "No withdrawals to act upon."
 msgstr ""
 
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:21
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:32
 #, python-format
 msgid ""
 "You might want to <a href=\"%(url)s\">check withdrawals that could not be "
 "matched to an event</a>."
 msgstr ""
 
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:39
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:50
 msgid "Filter"
 msgstr ""
 
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:49
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:60
 msgid "Customer"
 msgstr ""
 
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:56
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:67
 msgid "Actions"
 msgstr ""
 
@@ -415,14 +425,14 @@ msgstr ""
 msgid "We could not save your changes. See below for details."
 msgstr ""
 
-#: pretix_withdrawal/views.py:234
+#: pretix_withdrawal/views.py:243
 msgid "The comment has been updated."
 msgstr ""
 
-#: pretix_withdrawal/views.py:236
+#: pretix_withdrawal/views.py:245
 msgid "Could not update the comment."
 msgstr ""
 
-#: pretix_withdrawal/views.py:317
+#: pretix_withdrawal/views.py:326
 msgid "The withdrawal is settled."
 msgstr ""
