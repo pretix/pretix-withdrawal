@@ -19,6 +19,7 @@ from pretix.base.services.mail import (
     mail_send_task,
     render_mail,
 )
+from pretix.base.validators import NoUrlValidator
 from pretix.helpers.format import format_map
 from pretix.multidomain.urlreverse import build_absolute_uri
 
@@ -66,6 +67,13 @@ class Withdrawal(LoggedModel):
         help_text=_(
             "Do you want to withdraw part of your order? Please specify here which items you want to cancel."
         ),
+        validators=[
+            NoUrlValidator(
+                message=_(
+                    "Your message includes an URL and therefore is considered SPAM. Please remove the URL %(match)s."
+                ),
+            ),
+        ],
     )
     locale = models.CharField(
         verbose_name=_("Locale"),
