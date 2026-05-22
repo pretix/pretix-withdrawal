@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-21 09:25+0200\n"
+"POT-Creation-Date: 2026-05-22 08:19+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: pretix team\n"
 "Language-Team: \n"
@@ -101,31 +101,35 @@ msgstr "erledigt"
 msgid "not settled"
 msgstr "nicht erledigt"
 
-#: pretix_withdrawal/models.py:49
+#: pretix_withdrawal/models.py:50
 msgid "Order code"
 msgstr "Bestellnummer"
 
-#: pretix_withdrawal/models.py:51
+#: pretix_withdrawal/models.py:55
+msgid "The order code may only contain letters, numbers, dots and dashes."
+msgstr "Die Bestellnummer darf nur Buchstaben, Zahlen, Punkt und Bindestrich enthalten."
+
+#: pretix_withdrawal/models.py:60
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:32
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:24
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:35
 msgid "Email"
 msgstr "E-Mail"
 
-#: pretix_withdrawal/models.py:52
+#: pretix_withdrawal/models.py:61
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:30
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:22
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:33
 msgid "Name"
 msgstr "Name"
 
-#: pretix_withdrawal/models.py:54 pretix_withdrawal/models.py:198
+#: pretix_withdrawal/models.py:63 pretix_withdrawal/models.py:212
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:76
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:42
 msgid "Message"
 msgstr "Nachricht"
 
-#: pretix_withdrawal/models.py:58
+#: pretix_withdrawal/models.py:67
 msgid ""
 "Do you want to withdraw part of your order? Please specify here which items "
 "you want to cancel."
@@ -133,48 +137,48 @@ msgstr ""
 "Willst Du nur einen Teil Deiner Bestellung widerrufen? Gib bitte hier an, "
 "welche Positionen Du widerrufen möchtest."
 
-#: pretix_withdrawal/models.py:62
+#: pretix_withdrawal/models.py:71
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:34
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:39
 msgid "Locale"
 msgstr "Sprache"
 
-#: pretix_withdrawal/models.py:66
+#: pretix_withdrawal/models.py:75
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:82
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:44
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:88
 msgid "Internal comment"
 msgstr "Interner Kommentar"
 
-#: pretix_withdrawal/models.py:173
+#: pretix_withdrawal/models.py:185
 #, python-brace-format
 msgid "Withdrawal for {order}"
 msgstr "Widerruf für {order}"
 
-#: pretix_withdrawal/models.py:176
+#: pretix_withdrawal/models.py:188
 msgid "View withdrawal"
 msgstr "Widerruf ansehen"
 
-#: pretix_withdrawal/models.py:177
+#: pretix_withdrawal/models.py:190
 msgid "From"
 msgstr "Von"
 
-#: pretix_withdrawal/models.py:179
+#: pretix_withdrawal/models.py:193
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:37
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:50
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:38
 msgid "Order"
 msgstr "Bestellung"
 
-#: pretix_withdrawal/models.py:181
+#: pretix_withdrawal/models.py:195
 msgid "View order"
 msgstr "Bestellung ansehen"
 
-#: pretix_withdrawal/models.py:193
+#: pretix_withdrawal/models.py:207
 msgid "Order (code unknown)"
 msgstr "Bestellnummer (unbekannt)"
 
-#: pretix_withdrawal/models.py:196
+#: pretix_withdrawal/models.py:210
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:74
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:52
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:75

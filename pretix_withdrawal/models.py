@@ -3,6 +3,7 @@ from typing import Any, Dict, Union
 import css_inline
 import uuid
 from django.conf import settings
+from django.core.validators import RegexValidator
 from django.db import models
 from django.template.loader import get_template
 from django.utils.formats import date_format
@@ -45,8 +46,16 @@ class Withdrawal(LoggedModel):
     created = models.DateTimeField(auto_now_add=True)
     settled = models.DateTimeField(null=True)
     order_code = models.CharField(
-        max_length=16,
+        max_length=67,  # user may enter order.full_code
         verbose_name=_("Order code"),
+        validators=[
+            RegexValidator(
+                regex="^[a-zA-Z0-9]([a-zA-Z0-9.-]*[a-zA-Z0-9])?$",
+                message=_(
+                    "The order code may only contain letters, numbers, dots and dashes."
+                ),
+            ),
+        ],
     )
     email = models.EmailField(db_index=True, verbose_name=_("Email"), max_length=190)
     name = models.CharField(max_length=255, verbose_name=_("Name"), blank=True)
