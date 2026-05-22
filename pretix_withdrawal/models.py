@@ -208,10 +208,6 @@ class Withdrawal(LoggedModel):
                 self.organizer,
                 "plugins:pretix_withdrawal:control.organizer.settings",
             ),
-            "disable_url": build_absolute_uri(
-                self.organizer,
-                "plugins:pretix_withdrawal:control.organizer.settings",
-            ),
         }
         tpl_html = get_template("pretixbase/email/notification.html")
 
