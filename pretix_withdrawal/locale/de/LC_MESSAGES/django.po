@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-22 08:19+0200\n"
+"POT-Creation-Date: 2026-05-22 09:20+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: pretix team\n"
 "Language-Team: \n"
@@ -86,7 +86,7 @@ msgid "Search for…"
 msgstr "Suche nach …"
 
 #: pretix_withdrawal/forms.py:127
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:55
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:66
 msgid "Status"
 msgstr "Status"
 
@@ -108,7 +108,9 @@ msgstr "Bestellnummer"
 
 #: pretix_withdrawal/models.py:55
 msgid "The order code may only contain letters, numbers, dots and dashes."
-msgstr "Die Bestellnummer darf nur Buchstaben, Zahlen, Punkt und Bindestrich enthalten."
+msgstr ""
+"Die Bestellnummer darf nur Buchstaben, Zahlen, Punkt und Bindestrich "
+"enthalten."
 
 #: pretix_withdrawal/models.py:60
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:32
@@ -125,7 +127,7 @@ msgid "Name"
 msgstr "Name"
 
 #: pretix_withdrawal/models.py:63 pretix_withdrawal/models.py:212
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:76
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:87
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:42
 msgid "Message"
 msgstr "Nachricht"
@@ -145,7 +147,7 @@ msgid "Locale"
 msgstr "Sprache"
 
 #: pretix_withdrawal/models.py:75
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:82
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:93
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:44
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:88
 msgid "Internal comment"
@@ -166,7 +168,7 @@ msgstr "Von"
 
 #: pretix_withdrawal/models.py:193
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:37
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:50
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:61
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:38
 msgid "Order"
 msgstr "Bestellung"
@@ -181,7 +183,7 @@ msgstr "Bestellnummer (unbekannt)"
 
 #: pretix_withdrawal/models.py:210
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:74
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:52
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:63
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:75
 msgid "Event"
 msgstr "Veranstaltung"
@@ -280,14 +282,14 @@ msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:12
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:28
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:136
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:147
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:21
 msgid "Not settled"
 msgstr "Nicht erledigt"
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:14
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:27
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:138
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:149
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:20
 msgid "Settled"
 msgstr "Erledigt"
@@ -298,14 +300,14 @@ msgid "Details"
 msgstr "Details"
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:25
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:54
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:65
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:18
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:31
 msgid "Received"
 msgstr "Empfangen"
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:58
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:107
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:118
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:32
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:59
 msgid ""
@@ -316,7 +318,7 @@ msgstr ""
 "könnte sich von der Bestell-E-Mail unterscheiden!"
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:60
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:109
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:120
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:34
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:61
 msgid "Beware: withdrawal is from a different email than the order!"
@@ -325,7 +327,7 @@ msgstr ""
 "E-Mail!"
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:67
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:116
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:127
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:68
 msgid ""
 "The provided order-code could not be matched to any existing order. Click "
@@ -353,7 +355,7 @@ msgid "Update comment"
 msgstr "Kommentar speichern"
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:129
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:151
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:162
 msgid "Mark as settled"
 msgstr "Als erledigt markieren"
 
@@ -373,10 +375,22 @@ msgid "See organizer’s settings"
 msgstr "Einstellungen des Veranstalters ansehen"
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:13
+msgid ""
+"There are <b>unsettled withdrawals not listed here</b> as they are not "
+"assigned to any event."
+msgstr ""
+"Es gibt <b>unbearbeitete Widerrufe</b>, die hier nicht gelistet sind, da sie "
+"keiner Veranstaltung zugewiesen werden konnten."
+
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:17
+msgid "Check unassigned withdrawals"
+msgstr "Widerrufe, die keiner Veranstaltung zugewiesen sind, prüfen"
+
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:24
 msgid "No withdrawals to act upon."
 msgstr "Keine Widerrufe, die bearbeitet werden müssen."
 
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:21
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:32
 #, python-format
 msgid ""
 "You might want to <a href=\"%(url)s\">check withdrawals that could not be "
@@ -385,15 +399,15 @@ msgstr ""
 "Prüfen Sie bitte auch <a href=\"%(url)s\">Widerrufe, die keiner "
 "Veranstaltung zugeordnet werden konnten</a>."
 
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:39
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:50
 msgid "Filter"
 msgstr "Filtern"
 
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:49
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:60
 msgid "Customer"
 msgstr "Kunde"
 
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:56
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:67
 msgid "Actions"
 msgstr "Aktionen"
 
@@ -471,14 +485,14 @@ msgstr ""
 "Wir konnten Ihre Änderungen nicht speichern. Die fehlerhaften Felder sind "
 "farblich markiert."
 
-#: pretix_withdrawal/views.py:234
+#: pretix_withdrawal/views.py:243
 msgid "The comment has been updated."
 msgstr "Der Kommentar wurde aktualisiert."
 
-#: pretix_withdrawal/views.py:236
+#: pretix_withdrawal/views.py:245
 msgid "Could not update the comment."
 msgstr "Kommentar konnte nicht gespeichert werden."
 
-#: pretix_withdrawal/views.py:317
+#: pretix_withdrawal/views.py:326
 msgid "The withdrawal is settled."
 msgstr "Der Widerruf ist erledigt."

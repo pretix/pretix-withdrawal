@@ -196,6 +196,15 @@ class EventWithdrawalListView(EventPermissionRequiredMixin, WithdrawalListViewAb
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx["basetemplate"] = "pretixcontrol/event/base.html"
+        if self.request.organizer.withdrawals.filter(
+            event__isnull=True, settled__isnull=True
+        ).exists():
+            ctx["warn_global_withdrawals_url"] = reverse(
+                "plugins:pretix_withdrawal:control.organizer.index",
+                kwargs={
+                    "organizer": self.request.organizer.slug,
+                },
+            )
         return ctx
 
 
