@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-22 08:21+0200\n"
+"POT-Creation-Date: 2026-05-22 09:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -124,7 +124,7 @@ msgid "Name"
 msgstr ""
 
 #: pretix_withdrawal/models.py:63 pretix_withdrawal/models.py:212
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:76
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:87
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:42
 msgid "Message"
 msgstr ""
@@ -142,7 +142,7 @@ msgid "Locale"
 msgstr ""
 
 #: pretix_withdrawal/models.py:75
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:82
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:93
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:44
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:88
 msgid "Internal comment"

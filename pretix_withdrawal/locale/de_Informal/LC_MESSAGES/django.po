@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-22 08:19+0200\n"
+"POT-Creation-Date: 2026-05-22 09:20+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: pretix team\n"
 "Language-Team: \n"
@@ -107,7 +107,9 @@ msgstr "Bestellnummer"
 
 #: pretix_withdrawal/models.py:55
 msgid "The order code may only contain letters, numbers, dots and dashes."
-msgstr "Die Bestellnummer darf nur Buchstaben, Zahlen, Punkt und Bindestrich enthalten."
+msgstr ""
+"Die Bestellnummer darf nur Buchstaben, Zahlen, Punkt und Bindestrich "
+"enthalten."
 
 #: pretix_withdrawal/models.py:60
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:32
@@ -124,7 +126,7 @@ msgid "Name"
 msgstr "Name"
 
 #: pretix_withdrawal/models.py:63 pretix_withdrawal/models.py:212
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:76
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:87
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:42
 msgid "Message"
 msgstr "Nachricht"
@@ -144,7 +146,7 @@ msgid "Locale"
 msgstr "Sprache"
 
 #: pretix_withdrawal/models.py:75
-#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:82
+#: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:93
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:44
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:88
 msgid "Internal comment"
@@ -375,6 +377,7 @@ msgstr "Einstellungen des Veranstalters ansehen"
 msgid ""
 "There are <b>unsettled withdrawals not listed here</b> as they are not "
 "assigned to any event."
+msgstr ""
 "Es gibt <b>unbearbeitete Widerrufe</b>, die hier nicht gelistet sind, da sie "
 "keiner Veranstaltung zugewiesen werden konnten."
 
