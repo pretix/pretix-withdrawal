@@ -89,7 +89,10 @@ class Withdrawal(LoggedModel):
                 "pretix_withdrawal.email.withdrawal.received",
             )
         if self.organizer.settings.withdrawal_contact_mail:
-            with language(self.event.settings.locale if self.event else self.locale, self.event.settings.region if self.event else None):
+            with language(
+                self.event.settings.locale if self.event else self.locale,
+                self.event.settings.region if self.event else None,
+            ):
                 self._send_notification_mail()
 
     def mail_warn_withdrawal_received(self):
