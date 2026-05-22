@@ -359,7 +359,9 @@ msgstr "Einstellungen Widerruf"
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/event_settings.html:7
 msgid "Settings for withdrawals can only be changed for the whole organizer."
-msgstr "Einstellungen für Widerrufe können nur für den Veranstalter insgesamt verändert werden."
+msgstr ""
+"Einstellungen für Widerrufe können nur für den Veranstalter insgesamt "
+"verändert werden."
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/event_settings.html:9
 msgid "See organizer’s settings"
