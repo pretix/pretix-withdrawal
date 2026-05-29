@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 from django.db import transaction
 from django.db.models import Exists, OuterRef, Q
 from django.shortcuts import get_object_or_404, redirect
@@ -164,7 +165,9 @@ class OrganizerWithdrawalPermissionMixin:
     def events_without_permission_exist(self):
         return self.request.organizer.events.filter(
             ~Exists(
-                self.request.user.teams.with_event_permission("event.orders:read").filter(
+                self.request.user.teams.with_event_permission(
+                    "event.orders:read"
+                ).filter(
                     Q(all_events=True) | Q(limit_events=OuterRef("pk")),
                     organizer_id=OuterRef("organizer_id"),
                 )
@@ -172,16 +175,23 @@ class OrganizerWithdrawalPermissionMixin:
         ).exists()
 
 
-class OrganizerWithdrawalListView(OrganizerDetailViewMixin, OrganizerWithdrawalPermissionMixin, WithdrawalListViewAbstract):
+class OrganizerWithdrawalListView(
+    OrganizerDetailViewMixin,
+    OrganizerWithdrawalPermissionMixin,
+    WithdrawalListViewAbstract,
+):
     def get_queryset(self):
         qs = self.request.organizer.withdrawals.all().select_related(
             "event",
             "order",
         )
 
-        if not self.request.user.has_active_staff_session(
-            self.request.session.session_key
-        ) and self.events_without_permission_exist:
+        if (
+            not self.request.user.has_active_staff_session(
+                self.request.session.session_key
+            )
+            and self.events_without_permission_exist
+        ):
             # user does not have access to all events: limit withdrawals to events
             # the user can event.orders:read only. Do not show unassigned withdrawals!
             qs = qs.filter(
@@ -269,17 +279,21 @@ class WithdrawalDetailViewAbstract(DetailView):
 
 
 class OrganizerWithdrawalDetailView(
-    OrganizerDetailViewMixin, OrganizerWithdrawalPermissionMixin, WithdrawalDetailViewAbstract
+    OrganizerDetailViewMixin,
+    OrganizerWithdrawalPermissionMixin,
+    WithdrawalDetailViewAbstract,
 ):
     def get_object(self, queryset=None):
-        withdrawal =  get_object_or_404(
+        withdrawal = get_object_or_404(
             Withdrawal.objects.select_related("order", "event"),
             organizer=self.request.organizer,
             pk=self.kwargs.get("pk"),
         )
         if not withdrawal.event and self.events_without_permission_exist:
             # only allow users with access to all events to access withdrawals that are not assigned to an event
-            raise PermissionDenied(_('You do not have permission to view this content.'))
+            raise PermissionDenied(
+                _("You do not have permission to view this content.")
+            )
         return withdrawal
 
     def get_context_data(self, **kwargs):
