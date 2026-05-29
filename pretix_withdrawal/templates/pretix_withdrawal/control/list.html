@@ -7,14 +7,28 @@
 {% block content %}
 
     <h2>{% trans "Withdrawals" %}</h2>
-    {% if warn_global_withdrawals_url %}
+    {% if request.event and withdrawals_without_event_exist %}
         <div class="alert alert-warning">
             <p>
                 {% blocktrans trimmed %}
                     There are <b>unsettled withdrawals not listed here</b> as they are not assigned to any event.
                 {% endblocktrans %}
                 <br>
-                <a href="{{ warn_global_withdrawals_url }}">{% trans "Check unassigned withdrawals" %}</a>
+                <a href="{% url "plugins:pretix_withdrawal:control.organizer.index" organizer=request.organizer.slug %}">
+                    {% trans "Check unassigned withdrawals" %}
+                </a>
+            </p>
+        </div>
+    {% endif %}
+    {% if events_without_permission_exist and withdrawals_without_event_exist %}
+        <div class="alert alert-warning">
+            <p>
+                <b>
+                    {% blocktrans trimmed %}
+                        There are withdrawals that are not assigned to any event. You do not have sufficient permissions to view them.
+                    {% endblocktrans %}
+                </b><br>
+                {% blocktrans trimmed %}To view unassigned withdrawals, you need read access on orders in all events.{% endblocktrans %}
             </p>
         </div>
     {% endif %}

@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.contrib import messages
 from django.db import transaction
-from django.db.models import Q
+from django.db.models import Exists, OuterRef, Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.utils.functional import cached_property
@@ -146,15 +146,33 @@ class WithdrawalListViewAbstract(PaginationMixin, ListView):
             request=self.request,
         )
 
+    @cached_property
+    def withdrawals_without_event_exist(self):
+        return self.request.organizer.withdrawals.filter(
+            event__isnull=True, settled__isnull=True
+        ).exists()
+
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx["filter_form"] = self.filter_form
+        ctx["withdrawals_without_event_exist"] = self.withdrawals_without_event_exist
         return ctx
 
 
-# TODO: OrganizerPermissionRequiredMixin?
-# see https://code.rami.io/pretix/pretix-withdrawal/-/merge_requests/1#note_32398
-class OrganizerWithdrawalListView(OrganizerDetailViewMixin, WithdrawalListViewAbstract):
+class OrganizerWithdrawalPermissionMixin:
+    @cached_property
+    def events_without_permission_exist(self):
+        return self.request.organizer.events.filter(
+            ~Exists(
+                self.request.user.teams.with_event_permission("event.orders:read").filter(
+                    Q(all_events=True) | Q(limit_events=OuterRef("pk")),
+                    organizer_id=OuterRef("organizer_id"),
+                )
+            )
+        ).exists()
+
+
+class OrganizerWithdrawalListView(OrganizerDetailViewMixin, OrganizerWithdrawalPermissionMixin, WithdrawalListViewAbstract):
     def get_queryset(self):
         qs = self.request.organizer.withdrawals.all().select_related(
             "event",
@@ -163,7 +181,9 @@ class OrganizerWithdrawalListView(OrganizerDetailViewMixin, WithdrawalListViewAb
 
         if not self.request.user.has_active_staff_session(
             self.request.session.session_key
-        ):
+        ) and self.events_without_permission_exist:
+            # user does not have access to all events: limit withdrawals to events
+            # the user can event.orders:read only. Do not show unassigned withdrawals!
             qs = qs.filter(
                 Q(
                     event__organizer_id__in=self.request.user.teams.filter(
@@ -176,7 +196,6 @@ class OrganizerWithdrawalListView(OrganizerDetailViewMixin, WithdrawalListViewAb
                         TeamQuerySet.event_permission_q("event.orders:read"),
                     ).values_list("limit_events__id", flat=True)
                 )
-                | Q(event__isnull=True)
             )
 
         if self.filter_form.is_valid():
@@ -187,6 +206,7 @@ class OrganizerWithdrawalListView(OrganizerDetailViewMixin, WithdrawalListViewAb
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx["basetemplate"] = "pretixcontrol/organizers/base.html"
+        ctx["events_without_permission_exist"] = self.events_without_permission_exist
         return ctx
 
 
@@ -207,15 +227,6 @@ class EventWithdrawalListView(EventPermissionRequiredMixin, WithdrawalListViewAb
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx["basetemplate"] = "pretixcontrol/event/base.html"
-        if self.request.organizer.withdrawals.filter(
-            event__isnull=True, settled__isnull=True
-        ).exists():
-            ctx["warn_global_withdrawals_url"] = reverse(
-                "plugins:pretix_withdrawal:control.organizer.index",
-                kwargs={
-                    "organizer": self.request.organizer.slug,
-                },
-            )
         return ctx
 
 
@@ -257,18 +268,19 @@ class WithdrawalDetailViewAbstract(DetailView):
         return redirect(self.get_success_url())
 
 
-# TODO: OrganizerPermissionRequiredMixin?
-# see https://code.rami.io/pretix/pretix-withdrawal/-/merge_requests/1#note_32398
 class OrganizerWithdrawalDetailView(
-    OrganizerDetailViewMixin, WithdrawalDetailViewAbstract
+    OrganizerDetailViewMixin, OrganizerWithdrawalPermissionMixin, WithdrawalDetailViewAbstract
 ):
-
     def get_object(self, queryset=None):
-        return get_object_or_404(
+        withdrawal =  get_object_or_404(
             Withdrawal.objects.select_related("order", "event"),
             organizer=self.request.organizer,
             pk=self.kwargs.get("pk"),
         )
+        if not withdrawal.event and self.events_without_permission_exist:
+            # only allow users with access to all events to access withdrawals that are not assigned to an event
+            raise PermissionDenied(_('You do not have permission to view this content.'))
+        return withdrawal
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
