@@ -33,6 +33,13 @@ class CreateForm(I18nModelForm):
             ),
         }
 
+    def __init__(self, *args, **kwargs):
+        organizer = kwargs.pop("organizer")
+        super().__init__(*args, **kwargs)
+        self.fields["message"].help_text = (
+            organizer.settings.withdrawal_form_message_help_text
+        )
+
 
 class OrganizerSettingsForm(SettingsForm):
     withdrawal_contact_mail = forms.CharField(
@@ -43,10 +50,34 @@ class OrganizerSettingsForm(SettingsForm):
             "If we receive a withdrawal, we will notify you on this email address. You can specify multiple recipients separated by commas."
         ),
     )
-    withdrawal_received_success_msg = I18nFormField(
-        label=_(
-            "Message shown to the user after submitting the form to withdraw from an order"
+
+    withdrawal_label = I18nFormField(
+        label=_("Label"),
+        required=True,
+        widget=I18nTextInput,
+        help_text=_(
+            "Used for the link in the footer and as the headline on the withdrawal form."
         ),
+    )
+    withdrawal_form_above_msg = I18nFormField(
+        label=_("Message shown above the form"),
+        required=True,
+        widget=I18nTextarea,
+        widget_kwargs={"attrs": {"rows": "3"}},
+    )
+    withdrawal_form_message_help_text = I18nFormField(
+        label=_("Help-text shown below the message input field"),
+        required=True,
+        widget=I18nTextarea,
+        widget_kwargs={"attrs": {"rows": "2"}},
+    )
+    withdrawal_submit_label = I18nFormField(
+        label=_("Label of the submit button"),
+        required=True,
+        widget=I18nTextInput,
+    )
+    withdrawal_received_success_msg = I18nFormField(
+        label=_("Message shown after successful submission"),
         required=True,
         widget=I18nTextarea,
         widget_kwargs={"attrs": {"rows": "3"}},

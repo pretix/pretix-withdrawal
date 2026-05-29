@@ -64,9 +64,6 @@ class Withdrawal(LoggedModel):
         verbose_name=_("Message"),
         null=True,
         blank=True,
-        help_text=_(
-            "Do you want to withdraw part of your order? Please specify here which items you want to cancel."
-        ),
         validators=[
             NoUrlValidator(
                 message=_(

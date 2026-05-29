@@ -49,7 +49,7 @@ def footer_link(sender, request=None, **kwargs):
             },
         )
     return {
-        "label": _("Withdraw from contract"),
+        "label": request.organizer.settings.withdrawal_label,
         "url": url,
         "cssclass": "btn btn-primary btn-xs",
     }
@@ -131,6 +131,34 @@ def nav_event_receiver(sender, request, **kwargs):
 
 
 settings_hierarkey.add_default("withdrawal_contact_mail", default_type=str, value=None)
+settings_hierarkey.add_default(
+    "withdrawal_label",
+    LazyI18nString.from_gettext(gettext_noop("Withdraw from contract")),
+    LazyI18nString,
+)
+
+settings_hierarkey.add_default(
+    "withdrawal_submit_label",
+    LazyI18nString.from_gettext(gettext_noop("Confirm withdrawal")),
+    LazyI18nString,
+)
+settings_hierarkey.add_default(
+    "withdrawal_form_above_msg",
+    LazyI18nString.from_gettext(
+        gettext_noop("Please fill out the form below to withdraw from your order.")
+    ),
+    LazyI18nString,
+)
+settings_hierarkey.add_default(
+    "withdrawal_form_message_help_text",
+    LazyI18nString.from_gettext(
+        gettext_noop(
+            "Do you want to withdraw part of your order? Please specify here which items you want to cancel."
+        )
+    ),
+    LazyI18nString,
+)
+
 settings_hierarkey.add_default(
     "withdrawal_received_success_msg",
     LazyI18nString.from_gettext(
