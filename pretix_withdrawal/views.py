@@ -89,6 +89,11 @@ class WithdrawalCreate(CreateView):
 
         return ret
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["organizer"] = self.request.organizer
+        return kwargs
+
     def form_invalid(self, form):
         messages.error(
             self.request, _("We could not save your changes. See below for details.")
@@ -108,6 +113,12 @@ class WithdrawalCreate(CreateView):
             ctx["basetemplate"] = "pretixpresale/event/base.html"
         else:
             ctx["basetemplate"] = "pretixpresale/organizers/base.html"
+
+        ctx["headline"] = self.request.organizer.settings.withdrawal_label
+        ctx["form_above_msg"] = (
+            self.request.organizer.settings.withdrawal_form_above_msg
+        )
+        ctx["submit_label"] = self.request.organizer.settings.withdrawal_submit_label
 
         return ctx
 

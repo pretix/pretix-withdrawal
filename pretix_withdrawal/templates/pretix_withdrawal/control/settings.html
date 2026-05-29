@@ -9,6 +9,13 @@
         <fieldset>
             <legend>{% trans "General" %}</legend>
             {% bootstrap_field form.withdrawal_contact_mail layout="horizontal" %}
+            {% bootstrap_field form.withdrawal_label layout="horizontal" %}
+        </fieldset>
+        <fieldset>
+            <legend>{% trans "Withdrawal form shown to the user" %}</legend>
+            {% bootstrap_field form.withdrawal_submit_label layout="horizontal" %}
+            {% bootstrap_field form.withdrawal_form_above_msg layout="horizontal" %}
+            {% bootstrap_field form.withdrawal_form_message_help_text layout="horizontal" %}
             {% bootstrap_field form.withdrawal_received_success_msg layout="horizontal" %}
         </fieldset>
         <fieldset>
