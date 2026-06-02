@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
 from . import __version__
@@ -51,3 +52,16 @@ class PluginApp(PluginConfig):
 
     def ready(self):
         from . import signals  # NOQA
+
+    def is_available(self, target):
+        from pretix.base.models import Event
+
+        org = target.organizer if isinstance(target, Event) else target
+        return (
+            org.slug
+            in (
+                "demo",
+                "a11y",
+            )
+            or settings.DEBUG
+        )
