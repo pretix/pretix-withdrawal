@@ -27,7 +27,7 @@ def on_control_order_info(sender: Event, request, order: Order, **kwargs):
 
 @receiver(global_footer_link, dispatch_uid="withdrawal_footer_link")
 def footer_link(sender, request=None, **kwargs):
-    if not request or not hasattr(request, "organizer"):
+    if not request or not hasattr(request, "organizer") or not request.organizer:
         return []
     if hasattr(request, "event"):
         if "pretix_withdrawal" not in request.event.plugins:
