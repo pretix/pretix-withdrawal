@@ -6,7 +6,7 @@ from i18nfield.strings import LazyI18nString
 from pretix.base.models import Event, Order
 from pretix.base.settings import settings_hierarkey
 from pretix.control.signals import nav_event, nav_organizer, order_info
-from pretix.multidomain.urlreverse import eventreverse
+from pretix.multidomain.urlreverse import eventreverse, mainreverse
 from pretix.presale.signals import global_footer_link
 
 
@@ -40,7 +40,7 @@ def footer_link(sender, request=None, **kwargs):
     else:
         if "pretix_withdrawal" not in request.organizer.plugins:
             return []
-        url = reverse(
+        url = mainreverse(
             "plugins:pretix_withdrawal:presale.organizer.create",
             kwargs={
                 "organizer": request.organizer.slug,
