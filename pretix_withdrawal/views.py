@@ -23,7 +23,13 @@ from pretix.control.views.organizer import (
 )
 from pretix.multidomain.urlreverse import eventreverse
 
-from .forms import CommentForm, CreateForm, OrganizerSettingsForm, WithdrawalFilterForm
+from .forms import (
+    CommentForm,
+    CreateForm,
+    OrganizerSettingsForm,
+    OrganizerWithdrawalFilterForm,
+    WithdrawalFilterForm,
+)
 from .models import Withdrawal
 
 # organizer.events:read für die Gesamtliste auf Organizer-Ebene
@@ -129,21 +135,15 @@ class WithdrawalListViewAbstract(PaginationMixin, ListView):
     context_object_name = "withdrawals"
     paginate_by = 30
     template_name = "pretix_withdrawal/control/list.html"
+    filter_form_class = WithdrawalFilterForm
 
     def get_queryset(self):
         raise NotImplementedError()
 
     @cached_property
     def filter_form(self):
-        return WithdrawalFilterForm(
-            data=(
-                self.request.GET
-                if len(self.request.GET)
-                else {
-                    "query": "",
-                    "status": "",
-                }
-            ),
+        return self.filter_form_class(
+            data=self.request.GET,
             request=self.request,
         )
 
@@ -180,6 +180,17 @@ class OrganizerWithdrawalListView(
     OrganizerWithdrawalPermissionMixin,
     WithdrawalListViewAbstract,
 ):
+    filter_form_class = OrganizerWithdrawalFilterForm
+
+    @cached_property
+    def filter_form(self):
+        return self.filter_form_class(
+            data=self.request.GET,
+            request=self.request,
+            # only allow filtering to events_none if user is allowed to see withdrawals without events
+            events_include_none=not self.events_without_permission_exist,
+        )
+
     def get_queryset(self):
         qs = self.request.organizer.withdrawals.all().select_related(
             "event",

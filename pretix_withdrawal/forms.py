@@ -1,5 +1,6 @@
 from django import forms
 from django.db.models import Q
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from i18nfield.forms import I18nFormField, I18nTextarea, I18nTextInput
 from pretix.base.forms import (
@@ -8,8 +9,12 @@ from pretix.base.forms import (
     PlaceholderValidator,
     SettingsForm,
 )
+from pretix.base.models.organizer import TeamQuerySet
 from pretix.base.validators import multimail_validate
+from pretix.control.forms import ModelChoiceFieldWithNone
 from pretix.control.forms.filter import FilterForm
+from pretix.control.forms.widgets import Select2
+from pretix.helpers.database import get_deterministic_ordering
 
 from .models import Withdrawal
 
@@ -145,6 +150,8 @@ class OrganizerSettingsForm(SettingsForm):
 
 
 class WithdrawalFilterForm(FilterForm):
+    orders = {"code": "order_code", "created": "created"}
+
     query = forms.CharField(
         label=_("Search for…"),
         widget=forms.TextInput(
@@ -165,7 +172,7 @@ class WithdrawalFilterForm(FilterForm):
     )
 
     def __init__(self, *args, **kwargs):
-        kwargs.pop("request")
+        self.request = kwargs.pop("request")
         super().__init__(*args, **kwargs)
 
     def filter_qs(self, qs):
@@ -174,8 +181,8 @@ class WithdrawalFilterForm(FilterForm):
         if fdata.get("query"):
             u = fdata.get("query")
             qs = qs.filter(
-                Q(order_code=u)
-                | Q(order__code=u)
+                Q(order_code__icontains=u)
+                | Q(order__code__icontains=u)
                 | Q(email__icontains=u)
                 | Q(name__icontains=u)
             )
@@ -185,6 +192,70 @@ class WithdrawalFilterForm(FilterForm):
                 qs = qs.filter(settled__isnull=False)
         else:
             qs = qs.filter(settled__isnull=True)
+
+        if fdata.get("ordering"):
+            qs = qs.order_by(
+                *get_deterministic_ordering(Withdrawal, self.get_order_by())
+            )
+
+        return qs
+
+
+class OrganizerWithdrawalFilterForm(WithdrawalFilterForm):
+    orders = {"code": "order_code", "created": "created", "event": "event"}
+
+    @staticmethod
+    def event_filter_queryset(user, session, organizer):
+        if user.has_active_staff_session(session.session_key):
+            return organizer.events.all()
+        return organizer.events.filter(
+            Q(
+                organizer_id__in=user.teams.filter(
+                    TeamQuerySet.event_permission_q("event.orders:read"),
+                    all_events=True,
+                ).values_list("organizer", flat=True)
+            )
+            | Q(
+                id__in=user.teams.filter(
+                    TeamQuerySet.event_permission_q("event.orders:read"),
+                ).values_list("limit_events__id", flat=True)
+            )
+        )
+
+    def __init__(self, *args, **kwargs):
+        events_include_none = kwargs.pop("events_include_none", False)
+        super().__init__(*args, **kwargs)
+
+        self.fields["event"] = ModelChoiceFieldWithNone(
+            label=_("Event"),
+            queryset=OrganizerWithdrawalFilterForm.event_filter_queryset(
+                self.request.user, self.request.session, self.request.organizer
+            ),
+            widget=Select2(
+                attrs={
+                    "data-model-select2": "event",
+                    "data-select2-url": reverse("control:events.typeahead")
+                    + "?organizer="
+                    + self.request.organizer.slug
+                    + "&permission=event.orders:read"
+                    + ("&include_none" if events_include_none else ""),
+                    "data-placeholder": _("All events"),
+                }
+            ),
+            empty_label=_("All events"),
+            none_label=_("No event"),
+            required=False,
+        )
+        self.fields["event"].widget.choices = self.fields["event"].choices
+
+    def filter_qs(self, qs):
+        fdata = self.cleaned_data
+        qs = super().filter_qs(qs)
+
+        if fdata.get("event") == "_none":
+            qs = qs.filter(event__isnull=True)
+        elif fdata.get("event"):
+            qs = qs.filter(event=fdata.get("event"))
 
         return qs
 
