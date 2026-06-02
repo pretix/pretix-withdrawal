@@ -52,9 +52,3 @@ class PluginApp(PluginConfig):
 
     def ready(self):
         from . import signals  # NOQA
-
-    def is_available(self, target):
-        from pretix.base.models import Event
-
-        org = target.organizer if isinstance(target, Event) else target
-        return org.slug in ("demo",) or settings.DEBUG
