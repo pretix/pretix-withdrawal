@@ -22,19 +22,22 @@ from pretix.base.services.mail import (
 from pretix.helpers.format import format_map
 from pretix.multidomain.urlreverse import build_absolute_uri
 
-
 try:
     # pretix pre 2026.05 do not have NoUrlValidator yet
     from pretix.base.validators import NoUrlValidator
 except ImportError:
+    from django.core.exceptions import ValidationError
     from pretix.base.templatetags.rich_text import URL_RE
+
     class NoUrlValidator(RegexValidator):
         regex = URL_RE
         inverse_match = True
 
         def __init__(self, **kwargs):
             if not kwargs.get("message"):
-                kwargs["message"] = _('You entered an URL, which is not allowed. Please remove %(match)s from your input.')
+                kwargs["message"] = _(
+                    "You entered an URL, which is not allowed. Please remove %(match)s from your input."
+                )
             if not kwargs.get("code"):
                 kwargs["code"] = "contains_url"
             super().__init__(**kwargs)
@@ -48,7 +51,7 @@ except ImportError:
                     params={
                         "value": value,
                         "match": regex_matches.group(0) if regex_matches else "",
-                    }
+                    },
                 )
 
 
