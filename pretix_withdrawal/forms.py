@@ -11,12 +11,17 @@ from pretix.base.forms import (
 )
 from pretix.base.models.organizer import TeamQuerySet
 from pretix.base.validators import multimail_validate
-from pretix.control.forms import ModelChoiceFieldWithNone
 from pretix.control.forms.filter import FilterForm
 from pretix.control.forms.widgets import Select2
 from pretix.helpers.database import get_deterministic_ordering
 
 from .models import Withdrawal
+
+try:
+    # 2026-06-05: ModelChoiceFieldWithNone is only available on latest pretix
+    from pretix.control.forms import ModelChoiceFieldWithNone
+except ImportError:
+    pass
 
 
 class CreateForm(I18nModelForm):
@@ -226,27 +231,33 @@ class OrganizerWithdrawalFilterForm(WithdrawalFilterForm):
         events_include_none = kwargs.pop("events_include_none", False)
         super().__init__(*args, **kwargs)
 
-        self.fields["event"] = ModelChoiceFieldWithNone(
-            label=_("Event"),
-            queryset=OrganizerWithdrawalFilterForm.event_filter_queryset(
-                self.request.user, self.request.session, self.request.organizer
-            ),
-            widget=Select2(
-                attrs={
-                    "data-model-select2": "event",
-                    "data-select2-url": reverse("control:events.typeahead")
-                    + "?organizer="
-                    + self.request.organizer.slug
-                    + "&permission=event.orders:read"
-                    + ("&include_none" if events_include_none else ""),
-                    "data-placeholder": _("All events"),
-                }
-            ),
-            empty_label=_("All events"),
-            none_label=_("No event"),
-            required=False,
-        )
-        self.fields["event"].widget.choices = self.fields["event"].choices
+        try:
+            # 2026-06-05: only allow filtering by event on latest pretix as with
+            # ModelChoiceFieldWithNone also came improvements to control:events.typeahead
+            # regarding permissions on events and limit to organizers
+            self.fields["event"] = ModelChoiceFieldWithNone(
+                label=_("Event"),
+                queryset=OrganizerWithdrawalFilterForm.event_filter_queryset(
+                    self.request.user, self.request.session, self.request.organizer
+                ),
+                widget=Select2(
+                    attrs={
+                        "data-model-select2": "event",
+                        "data-select2-url": reverse("control:events.typeahead")
+                        + "?organizer="
+                        + self.request.organizer.slug
+                        + "&permission=event.orders:read"
+                        + ("&include_none" if events_include_none else ""),
+                        "data-placeholder": _("All events"),
+                    }
+                ),
+                empty_label=_("All events"),
+                none_label=_("No event"),
+                required=False,
+            )
+            self.fields["event"].widget.choices = self.fields["event"].choices
+        except NameError:
+            pass
 
     def filter_qs(self, qs):
         fdata = self.cleaned_data
