@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("pretixbase", "0299_itemprogramtime_location"),
+        ("pretixbase", "0276_item_hidden_if_item_available_mode"),
     ]
 
     operations = [
