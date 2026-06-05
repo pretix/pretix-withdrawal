@@ -3,7 +3,7 @@ name = "pretix-withdrawal"
 dynamic = ["version"]
 description = "Support right of withdrawal from purchases to comply with EU legislation."
 readme = "README.rst"
-license = {text = "pretix Enterprise"}
+license = {file = "LICENSE"}
 keywords = ["pretix"]
 authors = [
     {name = "pretix team", email = "support@pretix.eu"},
@@ -28,8 +28,8 @@ requires = [
 ]
 
 [project.urls]
-homepage = "https://code.rami.io/pretix/pretix-withdrawal"
-repository = "ssh://git@code.rami.io:10022/pretix/pretix-withdrawal.git"
+homepage = "https://github.com/pretix/pretix-withdrawal"
+repository = "https://github.com/pretix/pretix-withdrawal.git"
 
 [tool.setuptools]
 include-package-data = true
