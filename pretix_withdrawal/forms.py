@@ -195,7 +195,7 @@ class OrganizerSettingsForm(SettingsForm):
         else:
             d["withdrawal_custom_url"] = ""
             if not d.get("withdrawal_contact_mail") and not self.errors.get("withdrawal_contact_mail"):
-                self.add_error("withdrawal_contact_mail", _("This field is required"))
+                self.add_error("withdrawal_contact_mail", _("This field is required."))
         return d
 
 
