@@ -183,16 +183,21 @@ class OrganizerSettingsForm(SettingsForm):
 
     def clean(self):
         d = super().clean()
-        if d.get("withdrawal_use_custom", False) and d.get("withdrawal_custom_url"):
-            # make sure at least one URL is provided
+        if d.get("withdrawal_use_custom", False):
             localized_urls = d.get("withdrawal_custom_url")
-            for lang_code in self.organizer.settings.locales:
-                url = localized_urls.localize(lang_code)
-                try:
-                    URLValidator()(url)
-                except ValidationError as e:
-                    self.add_error("withdrawal_custom_url", e)
-                    break
+            if not localized_urls:
+                # placeholder-validation might have removed custom_url from cleaned_data
+                if not self.errors.get("withdrawal_custom_url"):
+                    self.add_error("withdrawal_custom_url", _("This field is required."))
+            else:
+                # make sure at least one URL is provided
+                for lang_code in self.organizer.settings.locales:
+                    url = localized_urls.localize(lang_code)
+                    try:
+                        URLValidator()(url)
+                    except ValidationError as e:
+                        self.add_error("withdrawal_custom_url", e)
+                        break
 
             # clear email notification
             d["withdrawal_contact_mail"] = ""
