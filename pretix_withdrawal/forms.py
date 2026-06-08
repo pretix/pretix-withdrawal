@@ -63,7 +63,7 @@ class OrganizerSettingsForm(SettingsForm):
         required=False,
         widget=I18nTextInput,
         help_text=_(
-            "You can use your own withdrawal form. We will redirect userd to the provided URL."
+            "You can use your own withdrawal form. The link in the footer will redirect to the provided URL."
         ),
         max_length=200,
     )
