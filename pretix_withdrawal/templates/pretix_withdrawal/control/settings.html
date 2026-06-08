@@ -6,30 +6,50 @@
     <form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
         {% bootstrap_form_errors form %}
         {% csrf_token %}
-        <fieldset>
-            <legend>{% trans "General" %}</legend>
-            {% bootstrap_field form.withdrawal_contact_mail layout="horizontal" %}
-            {% bootstrap_field form.withdrawal_label layout="horizontal" %}
-        </fieldset>
-        <fieldset>
-            <legend>{% trans "Withdrawal form shown to the user" %}</legend>
-            {% bootstrap_field form.withdrawal_submit_label layout="horizontal" %}
-            {% bootstrap_field form.withdrawal_form_above_msg layout="horizontal" %}
-            {% bootstrap_field form.withdrawal_form_message_help_text layout="horizontal" %}
-            {% bootstrap_field form.withdrawal_received_success_msg layout="horizontal" %}
-        </fieldset>
-        <fieldset>
-            <legend>{% trans "Email sent to the user who issued the withdrawal" %}</legend>
-            {% bootstrap_field form.withdrawal_received_mail_subject layout="horizontal" %}
-            {% bootstrap_field form.withdrawal_received_mail_body layout="horizontal" %}
-        </fieldset>
-        <fieldset>
-            <legend>{% trans "Email sent to the order's email" %}</legend>
-            <p>{% trans "If the withdrawal and the order are based on different email addresses, we will send an email to the order's email address as well." %}</p>
-            {% bootstrap_field form.withdrawal_warn_mail_subject layout="horizontal" %}
-            {% bootstrap_field form.withdrawal_warn_mail_body layout="horizontal" %}
-        </fieldset>
-
+        <div class="tabbed-form">
+            <fieldset>
+                <legend>{% trans "General" %}</legend>
+                {% bootstrap_field form.withdrawal_use_custom layout="horizontal" %}
+                {% bootstrap_field form.withdrawal_custom_url layout="horizontal" %}
+                {% bootstrap_field form.withdrawal_contact_mail layout="horizontal" %}
+                {% bootstrap_field form.withdrawal_label layout="horizontal" %}
+            </fieldset>
+            <fieldset>
+                <legend>{% trans "Withdrawal form" %}</legend>
+                <div class="alert alert-warning" data-display-dependency="#id_withdrawal_use_custom">
+                    <p>{% trans "pretix redirects users to your own withdrawal form. The settings here do not have any effect." %}</p>
+                </div>
+                {% bootstrap_field form.withdrawal_submit_label layout="horizontal" %}
+                {% bootstrap_field form.withdrawal_form_above_msg layout="horizontal" %}
+                {% bootstrap_field form.withdrawal_form_message_help_text layout="horizontal" %}
+                {% bootstrap_field form.withdrawal_received_success_msg layout="horizontal" %}
+            </fieldset>
+            <fieldset>
+                <legend>{% trans "Emails" %}</legend>
+                <div class="alert alert-warning" data-display-dependency="#id_withdrawal_use_custom">
+                    <p>{% trans "pretix redirects users to your own withdrawal form. The settings here do not have any effect." %}</p>
+                </div>
+                <details class="panel panel-default">
+                    <summary class="panel-heading">
+                        <h4 class="panel-title">{% trans "Email sent to the user who issued the withdrawal" %}</h4>
+                    </summary>
+                    <div class="panel-body">
+                        {% bootstrap_field form.withdrawal_received_mail_subject layout="horizontal" %}
+                        {% bootstrap_field form.withdrawal_received_mail_body layout="horizontal" %}
+                    </div>
+                </details>
+                <details class="panel panel-default">
+                    <summary class="panel-heading">
+                        <h4 class="panel-title">{% trans "Email sent to the order's email" %}</h4>
+                    </summary>
+                    <div class="panel-body">
+                        <p>{% trans "If the withdrawal and the order are based on different email addresses, we will send an email to the order's email address as well." %}</p>
+                        {% bootstrap_field form.withdrawal_warn_mail_subject layout="horizontal" %}
+                        {% bootstrap_field form.withdrawal_warn_mail_body layout="horizontal" %}
+                    </div>
+                </details>
+            </fieldset>
+        </div>
         <div class="form-group submit-group">
             <button type="submit" class="btn btn-primary btn-save">
                 {% trans "Save" %}

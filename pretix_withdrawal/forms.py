@@ -1,5 +1,7 @@
 from django import forms
 from django.db.models import Q
+from django.core.exceptions import ValidationError
+from django.core.validators import URLValidator
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from i18nfield.forms import I18nFormField, I18nTextarea, I18nTextInput
@@ -52,10 +54,24 @@ class CreateForm(I18nModelForm):
 
 
 class OrganizerSettingsForm(SettingsForm):
+    withdrawal_use_custom = forms.BooleanField(
+        label=_("Redirect to your own withdrawal form"),
+        required=False,
+    )
+    withdrawal_custom_url = I18nFormField(
+        label=_("Redirect to"),
+        required=False,
+        widget=I18nTextInput,
+        help_text=_(
+            "You can use your own withdrawal form. We will redirect userd to the provided URL."
+        ),
+        max_length=200,
+    )
+
     withdrawal_contact_mail = forms.CharField(
         label=_("Email address"),
-        required=True,
         validators=[multimail_validate],
+        required=False,
         help_text=_(
             "If we receive a withdrawal, we will notify you on this email address. You can specify multiple recipients separated by commas."
         ),
@@ -119,7 +135,15 @@ class OrganizerSettingsForm(SettingsForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.event = kwargs.pop("obj")
+        self.organizer = kwargs.pop("obj")
+
+        self.fields["withdrawal_custom_url"].widget.attrs = {
+            'data-display-dependency': '#id_withdrawal_use_custom',
+        }
+        self.fields["withdrawal_contact_mail"].widget.attrs = {
+            'data-display-dependency': '#id_withdrawal_use_custom',
+            'data-inverse': '',
+        }
 
         phs = ["{email}", "{code}"]
         phs_str = ", ".join(phs)
@@ -152,6 +176,27 @@ class OrganizerSettingsForm(SettingsForm):
         self.fields["withdrawal_warn_mail_subject"].help_text = self.fields[
             "withdrawal_warn_mail_body"
         ].help_text = _("Available placeholders: {list}").format(list=phs_str)
+
+    def clean(self):
+        d = super().clean()
+        if d.get("withdrawal_use_custom", False):
+            # make sure at least one URL is provided
+            localized_urls = d.get("withdrawal_custom_url")
+            for lang_code in self.organizer.settings.locales:
+                url = localized_urls.localize(lang_code)
+                try:
+                    URLValidator()(url)
+                except ValidationError as e:
+                    self.add_error("withdrawal_custom_url", e)
+                    break
+
+            # clear email notification
+            d["withdrawal_contact_mail"] = ""
+        else:
+            d["withdrawal_custom_url"] = ""
+            if not d.get("withdrawal_contact_mail") and not self.errors.get("withdrawal_contact_mail"):
+                self.add_error("withdrawal_contact_mail", _("This field is required"))
+        return d
 
 
 class WithdrawalFilterForm(FilterForm):
