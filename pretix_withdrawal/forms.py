@@ -188,7 +188,9 @@ class OrganizerSettingsForm(SettingsForm):
             if not localized_urls:
                 # placeholder-validation might have removed custom_url from cleaned_data
                 if not self.errors.get("withdrawal_custom_url"):
-                    self.add_error("withdrawal_custom_url", _("This field is required."))
+                    self.add_error(
+                        "withdrawal_custom_url", _("This field is required.")
+                    )
             else:
                 # make sure at least one URL is provided
                 for lang_code in self.organizer.settings.locales:
