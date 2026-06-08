@@ -142,7 +142,8 @@ msgstr "Keine Veranstaltung"
 msgid ""
 "You entered an URL, which is not allowed. Please remove %(match)s from your "
 "input."
-msgstr "Sie haben eine URL eingegeben. Dies ist nicht erlaubt. Bitte entfernen Sie "
+msgstr ""
+"Sie haben eine URL eingegeben. Dies ist nicht erlaubt. Bitte entfernen Sie "
 "%(match)s aus Ihrer Eingabe."
 
 #: pretix_withdrawal/models.py:82

@@ -142,7 +142,7 @@ msgid ""
 "You entered an URL, which is not allowed. Please remove %(match)s from your "
 "input."
 msgstr ""
-msgstr "Du hast eine URL eingegeben. Dies ist nicht erlaubt. Bitte entferne "
+"Du hast eine URL eingegeben. Dies ist nicht erlaubt. Bitte entferne "
 "%(match)s aus Deiner Eingabe."
 
 #: pretix_withdrawal/models.py:82
