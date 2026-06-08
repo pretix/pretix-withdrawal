@@ -144,9 +144,7 @@ class OrganizerSettingsForm(SettingsForm):
 
         phs = ["{event}", "{organizer}"]
         phs_str = ", ".join(phs)
-        self.fields["withdrawal_custom_url"].validators = [
-            PlaceholderValidator(phs)
-        ]
+        self.fields["withdrawal_custom_url"].validators = [PlaceholderValidator(phs)]
         self.fields["withdrawal_custom_url"].help_text = _(
             "You can use your own withdrawal form. The link in the footer will redirect to the provided URL. Available placeholders: {list}"
         ).format(list=phs_str)
