@@ -32,10 +32,6 @@ from .forms import (
 )
 from .models import Withdrawal
 
-# organizer.events:read für die Gesamtliste auf Organizer-Ebene
-# event.orders:read und zum Canceln :write
-# spätere e-mails damit verschicken? with language(withdrawal.locale, template.event.settings.region):
-
 
 class WithdrawalCreate(CreateView):
     model = Withdrawal

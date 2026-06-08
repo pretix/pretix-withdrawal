@@ -1,7 +1,7 @@
 from django import forms
-from django.db.models import Q
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
+from django.db.models import Q
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from i18nfield.forms import I18nFormField, I18nTextarea, I18nTextInput
@@ -138,11 +138,11 @@ class OrganizerSettingsForm(SettingsForm):
         self.organizer = kwargs.pop("obj")
 
         self.fields["withdrawal_custom_url"].widget.attrs = {
-            'data-display-dependency': '#id_withdrawal_use_custom',
+            "data-display-dependency": "#id_withdrawal_use_custom",
         }
         self.fields["withdrawal_contact_mail"].widget.attrs = {
-            'data-display-dependency': '#id_withdrawal_use_custom',
-            'data-inverse': '',
+            "data-display-dependency": "#id_withdrawal_use_custom",
+            "data-inverse": "",
         }
 
         phs = ["{email}", "{code}"]
@@ -194,7 +194,9 @@ class OrganizerSettingsForm(SettingsForm):
             d["withdrawal_contact_mail"] = ""
         else:
             d["withdrawal_custom_url"] = ""
-            if not d.get("withdrawal_contact_mail") and not self.errors.get("withdrawal_contact_mail"):
+            if not d.get("withdrawal_contact_mail") and not self.errors.get(
+                "withdrawal_contact_mail"
+            ):
                 self.add_error("withdrawal_contact_mail", _("This field is required."))
         return d
 
