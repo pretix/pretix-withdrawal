@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-08 12:22+0200\n"
+"POT-Creation-Date: 2026-06-08 12:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: pretix_withdrawal/apps.py:17 pretix_withdrawal/apps.py:29
-#: pretix_withdrawal/apps.py:34 pretix_withdrawal/signals.py:64
+#: pretix_withdrawal/apps.py:34 pretix_withdrawal/signals.py:69
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:7
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:10
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:8
@@ -40,99 +40,117 @@ msgid "Orders"
 msgstr ""
 
 #: pretix_withdrawal/apps.py:41 pretix_withdrawal/apps.py:46
-#: pretix_withdrawal/signals.py:87 pretix_withdrawal/signals.py:109
+#: pretix_withdrawal/signals.py:92 pretix_withdrawal/signals.py:114
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:7
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:10
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:7
 msgid "Withdrawals"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:56
+#: pretix_withdrawal/forms.py:58
+msgid "Redirect to your own withdrawal form"
+msgstr ""
+
+#: pretix_withdrawal/forms.py:62
+msgid "Redirect to"
+msgstr ""
+
+#: pretix_withdrawal/forms.py:66
+msgid ""
+"You can use your own withdrawal form. The link in the footer will redirect "
+"to the provided URL."
+msgstr ""
+
+#: pretix_withdrawal/forms.py:72
 msgid "Email address"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:60
+#: pretix_withdrawal/forms.py:76
 msgid ""
 "If we receive a withdrawal, we will notify you on this email address. You "
 "can specify multiple recipients separated by commas."
 msgstr ""
 
-#: pretix_withdrawal/forms.py:65
+#: pretix_withdrawal/forms.py:81
 msgid "Label"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:69
+#: pretix_withdrawal/forms.py:85
 msgid ""
 "Used for the link in the footer and as the headline on the withdrawal form."
 msgstr ""
 
-#: pretix_withdrawal/forms.py:73
+#: pretix_withdrawal/forms.py:89
 msgid "Message shown above the form"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:79
+#: pretix_withdrawal/forms.py:95
 msgid "Help-text shown below the message input field"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:85
+#: pretix_withdrawal/forms.py:101
 msgid "Label of the submit button"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:90
+#: pretix_withdrawal/forms.py:106
 msgid "Message shown after successful submission"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:96 pretix_withdrawal/forms.py:108
+#: pretix_withdrawal/forms.py:112 pretix_withdrawal/forms.py:124
 msgid "Subject"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:102 pretix_withdrawal/forms.py:114
+#: pretix_withdrawal/forms.py:118 pretix_withdrawal/forms.py:130
 msgid "Body"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:130 pretix_withdrawal/forms.py:154
+#: pretix_withdrawal/forms.py:154 pretix_withdrawal/forms.py:178
 #, python-brace-format
 msgid "Available placeholders: {list}"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:142
+#: pretix_withdrawal/forms.py:166
 #, python-brace-format
 msgid "Available placeholders: {list}. Note that {empty} can be empty."
 msgstr ""
 
-#: pretix_withdrawal/forms.py:161 pretix_withdrawal/forms.py:164
+#: pretix_withdrawal/forms.py:198
+msgid "This field is required."
+msgstr ""
+
+#: pretix_withdrawal/forms.py:206 pretix_withdrawal/forms.py:209
 msgid "Search for…"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:170
+#: pretix_withdrawal/forms.py:215
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:90
 msgid "Status"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:172
+#: pretix_withdrawal/forms.py:217
 msgid "All withdrawals"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:173
+#: pretix_withdrawal/forms.py:218
 msgid "settled"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:174
+#: pretix_withdrawal/forms.py:219
 msgid "not settled"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:239 pretix_withdrawal/models.py:246
+#: pretix_withdrawal/forms.py:284 pretix_withdrawal/models.py:246
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:74
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:81
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:75
 msgid "Event"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:251 pretix_withdrawal/forms.py:254
+#: pretix_withdrawal/forms.py:296 pretix_withdrawal/forms.py:299
 msgid "All events"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:255
+#: pretix_withdrawal/forms.py:300
 msgid "No event"
 msgstr ""
 
@@ -219,25 +237,25 @@ msgstr ""
 msgid "Order (code unknown)"
 msgstr ""
 
-#: pretix_withdrawal/signals.py:132
+#: pretix_withdrawal/signals.py:144
 msgid "Withdraw from contract"
 msgstr ""
 
-#: pretix_withdrawal/signals.py:138
+#: pretix_withdrawal/signals.py:150
 msgid "Confirm withdrawal"
 msgstr ""
 
-#: pretix_withdrawal/signals.py:144
+#: pretix_withdrawal/signals.py:156
 msgid "Please fill out the form below to withdraw from your order."
 msgstr ""
 
-#: pretix_withdrawal/signals.py:152
+#: pretix_withdrawal/signals.py:164
 msgid ""
 "Do you want to withdraw part of your order? Please specify here which items "
 "you want to cancel."
 msgstr ""
 
-#: pretix_withdrawal/signals.py:162
+#: pretix_withdrawal/signals.py:174
 #, python-brace-format
 msgid ""
 "We received your withdrawal. We will send an email to {email} to acknowledge "
@@ -246,11 +264,11 @@ msgid ""
 "back to you shortly."
 msgstr ""
 
-#: pretix_withdrawal/signals.py:172
+#: pretix_withdrawal/signals.py:184
 msgid "Your withdrawal"
 msgstr ""
 
-#: pretix_withdrawal/signals.py:179
+#: pretix_withdrawal/signals.py:191
 #, python-brace-format
 msgid ""
 "Hello,\n"
@@ -272,11 +290,11 @@ msgid ""
 "Your {organizer} team"
 msgstr ""
 
-#: pretix_withdrawal/signals.py:198
+#: pretix_withdrawal/signals.py:210
 msgid "We received a withdrawal for your order"
 msgstr ""
 
-#: pretix_withdrawal/signals.py:206
+#: pretix_withdrawal/signals.py:218
 #, python-brace-format
 msgid ""
 "Hello,\n"
@@ -418,29 +436,40 @@ msgstr ""
 msgid "View details"
 msgstr ""
 
-#: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:10
+#: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:11
 msgid "General"
 msgstr ""
 
-#: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:15
-msgid "Withdrawal form shown to the user"
+#: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:18
+msgid "Withdrawal form"
 msgstr ""
 
-#: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:22
-msgid "Email sent to the user who issued the withdrawal"
-msgstr ""
-
-#: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:27
-msgid "Email sent to the order's email"
+#: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:20
+#: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:30
+msgid ""
+"You provided an URL to your own withdrawal form. The settings here do not "
+"have any effect."
 msgstr ""
 
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:28
+msgid "Emails"
+msgstr ""
+
+#: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:34
+msgid "Email sent to the user who issued the withdrawal"
+msgstr ""
+
+#: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:43
+msgid "Email sent to the order's email"
+msgstr ""
+
+#: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:46
 msgid ""
 "If the withdrawal and the order are based on different email addresses, we "
 "will send an email to the order's email address as well."
 msgstr ""
 
-#: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:35
+#: pretix_withdrawal/templates/pretix_withdrawal/control/settings.html:55
 msgid "Save"
 msgstr ""
 
