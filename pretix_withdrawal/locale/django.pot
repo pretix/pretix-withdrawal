@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-08 12:37+0200\n"
+"POT-Creation-Date: 2026-06-08 12:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,102 +55,103 @@ msgstr ""
 msgid "Redirect to"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:66
-msgid ""
-"You can use your own withdrawal form. The link in the footer will redirect "
-"to the provided URL."
-msgstr ""
-
-#: pretix_withdrawal/forms.py:72
+#: pretix_withdrawal/forms.py:69
 msgid "Email address"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:76
+#: pretix_withdrawal/forms.py:73
 msgid ""
 "If we receive a withdrawal, we will notify you on this email address. You "
 "can specify multiple recipients separated by commas."
 msgstr ""
 
-#: pretix_withdrawal/forms.py:81
+#: pretix_withdrawal/forms.py:78
 msgid "Label"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:85
+#: pretix_withdrawal/forms.py:82
 msgid ""
 "Used for the link in the footer and as the headline on the withdrawal form."
 msgstr ""
 
-#: pretix_withdrawal/forms.py:89
+#: pretix_withdrawal/forms.py:86
 msgid "Message shown above the form"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:95
+#: pretix_withdrawal/forms.py:92
 msgid "Help-text shown below the message input field"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:101
+#: pretix_withdrawal/forms.py:98
 msgid "Label of the submit button"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:106
+#: pretix_withdrawal/forms.py:103
 msgid "Message shown after successful submission"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:112 pretix_withdrawal/forms.py:124
+#: pretix_withdrawal/forms.py:109 pretix_withdrawal/forms.py:121
 msgid "Subject"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:118 pretix_withdrawal/forms.py:130
+#: pretix_withdrawal/forms.py:115 pretix_withdrawal/forms.py:127
 msgid "Body"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:154 pretix_withdrawal/forms.py:178
+#: pretix_withdrawal/forms.py:151
+#, python-brace-format
+msgid ""
+"You can use your own withdrawal form. The link in the footer will redirect "
+"to the provided URL. Available placeholders: {list}"
+msgstr ""
+
+#: pretix_withdrawal/forms.py:160 pretix_withdrawal/forms.py:184
 #, python-brace-format
 msgid "Available placeholders: {list}"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:166
+#: pretix_withdrawal/forms.py:172
 #, python-brace-format
 msgid "Available placeholders: {list}. Note that {empty} can be empty."
 msgstr ""
 
-#: pretix_withdrawal/forms.py:198
+#: pretix_withdrawal/forms.py:206
 msgid "This field is required."
 msgstr ""
 
-#: pretix_withdrawal/forms.py:206 pretix_withdrawal/forms.py:209
+#: pretix_withdrawal/forms.py:214 pretix_withdrawal/forms.py:217
 msgid "Search for…"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:215
+#: pretix_withdrawal/forms.py:223
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:90
 msgid "Status"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:217
+#: pretix_withdrawal/forms.py:225
 msgid "All withdrawals"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:218
+#: pretix_withdrawal/forms.py:226
 msgid "settled"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:219
+#: pretix_withdrawal/forms.py:227
 msgid "not settled"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:284 pretix_withdrawal/models.py:246
+#: pretix_withdrawal/forms.py:292 pretix_withdrawal/models.py:246
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:74
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:81
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:75
 msgid "Event"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:296 pretix_withdrawal/forms.py:299
+#: pretix_withdrawal/forms.py:304 pretix_withdrawal/forms.py:307
 msgid "All events"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:300
+#: pretix_withdrawal/forms.py:308
 msgid "No event"
 msgstr ""
 
@@ -499,22 +500,22 @@ msgstr ""
 msgid "Yes, mark as settled"
 msgstr ""
 
-#: pretix_withdrawal/views.py:106
+#: pretix_withdrawal/views.py:122
 msgid "We could not save your changes. See below for details."
 msgstr ""
 
-#: pretix_withdrawal/views.py:286
+#: pretix_withdrawal/views.py:302
 msgid "The comment has been updated."
 msgstr ""
 
-#: pretix_withdrawal/views.py:288
+#: pretix_withdrawal/views.py:304
 msgid "Could not update the comment."
 msgstr ""
 
-#: pretix_withdrawal/views.py:306
+#: pretix_withdrawal/views.py:322
 msgid "You do not have permission to view this content."
 msgstr ""
 
-#: pretix_withdrawal/views.py:374
+#: pretix_withdrawal/views.py:390
 msgid "The withdrawal is settled."
 msgstr ""
