@@ -17,7 +17,7 @@
             <fieldset>
                 <legend>{% trans "Withdrawal form" %}</legend>
                 <div class="alert alert-warning" data-display-dependency="#id_withdrawal_use_custom">
-                    <p>{% trans "pretix redirects users to your own withdrawal form. The settings here do not have any effect." %}</p>
+                    <p>{% trans "You provided an URL to your own withdrawal form. The settings here do not have any effect." %}</p>
                 </div>
                 {% bootstrap_field form.withdrawal_submit_label layout="horizontal" %}
                 {% bootstrap_field form.withdrawal_form_above_msg layout="horizontal" %}
@@ -27,7 +27,7 @@
             <fieldset>
                 <legend>{% trans "Emails" %}</legend>
                 <div class="alert alert-warning" data-display-dependency="#id_withdrawal_use_custom">
-                    <p>{% trans "pretix redirects users to your own withdrawal form. The settings here do not have any effect." %}</p>
+                    <p>{% trans "You provided an URL to your own withdrawal form. The settings here do not have any effect." %}</p>
                 </div>
                 <details class="panel panel-default">
                     <summary class="panel-heading">
