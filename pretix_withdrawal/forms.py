@@ -62,9 +62,6 @@ class OrganizerSettingsForm(SettingsForm):
         label=_("Redirect to"),
         required=False,
         widget=I18nTextInput,
-        help_text=_(
-            "You can use your own withdrawal form. The link in the footer will redirect to the provided URL."
-        ),
         max_length=200,
     )
 
@@ -145,6 +142,15 @@ class OrganizerSettingsForm(SettingsForm):
             "data-inverse": "",
         }
 
+        phs = ["{event}", "{organizer}"]
+        phs_str = ", ".join(phs)
+        self.fields["withdrawal_custom_url"].validators = [
+            PlaceholderValidator(phs)
+        ]
+        self.fields["withdrawal_custom_url"].help_text = _(
+            "You can use your own withdrawal form. The link in the footer will redirect to the provided URL. Available placeholders: {list}"
+        ).format(list=phs_str)
+
         phs = ["{email}", "{code}"]
         phs_str = ", ".join(phs)
         self.fields["withdrawal_received_success_msg"].validators = [
@@ -179,7 +185,7 @@ class OrganizerSettingsForm(SettingsForm):
 
     def clean(self):
         d = super().clean()
-        if d.get("withdrawal_use_custom", False):
+        if d.get("withdrawal_use_custom", False) and d.get("withdrawal_custom_url"):
             # make sure at least one URL is provided
             localized_urls = d.get("withdrawal_custom_url")
             for lang_code in self.organizer.settings.locales:
