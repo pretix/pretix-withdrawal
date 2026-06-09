@@ -31,6 +31,7 @@ from .forms import (
     WithdrawalFilterForm,
 )
 from .models import Withdrawal
+from .signals import _withdrawal_url
 
 
 class WithdrawalCreate(CreateView):
@@ -42,20 +43,14 @@ class WithdrawalCreate(CreateView):
     def get(self, request, *args, **kwargs):
         if request.organizer.settings.withdrawal_use_custom:
             return redirect(
-                str(request.organizer.settings.withdrawal_custom_url).format(
-                    event=request.event.slug if hasattr(request, "event") else "",
-                    organizer=request.organizer.slug,
-                )
+                _withdrawal_url(request.organizer, getattr(request, "event", None))
             )
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         if request.organizer.settings.withdrawal_use_custom:
             return redirect(
-                str(request.organizer.settings.withdrawal_custom_url).format(
-                    event=request.event.slug if hasattr(request, "event") else "",
-                    organizer=request.organizer.slug,
-                )
+                _withdrawal_url(request.organizer, getattr(request, "event", None))
             )
         return super().post(request, *args, **kwargs)
 
