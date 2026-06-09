@@ -32,16 +32,32 @@ from .forms import (
 )
 from .models import Withdrawal
 
-# organizer.events:read für die Gesamtliste auf Organizer-Ebene
-# event.orders:read und zum Canceln :write
-# spätere e-mails damit verschicken? with language(withdrawal.locale, template.event.settings.region):
-
 
 class WithdrawalCreate(CreateView):
     model = Withdrawal
     form_class = CreateForm
     context_object_name = "withdrawal"
     template_name = "pretix_withdrawal/presale_form.html"
+
+    def get(self, request, *args, **kwargs):
+        if request.organizer.settings.withdrawal_use_custom:
+            return redirect(
+                str(request.organizer.settings.withdrawal_custom_url).format(
+                    event=request.event.slug if hasattr(request, "event") else "",
+                    organizer=request.organizer.slug,
+                )
+            )
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        if request.organizer.settings.withdrawal_use_custom:
+            return redirect(
+                str(request.organizer.settings.withdrawal_custom_url).format(
+                    event=request.event.slug if hasattr(request, "event") else "",
+                    organizer=request.organizer.slug,
+                )
+            )
+        return super().post(request, *args, **kwargs)
 
     @transaction.atomic
     def form_valid(self, form):

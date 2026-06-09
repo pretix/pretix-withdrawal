@@ -44,6 +44,11 @@ def footer_link(sender, request=None, **kwargs):
             request.organizer,
             "plugins:pretix_withdrawal:presale.organizer.create",
         )
+    if request.organizer.settings.withdrawal_use_custom:
+        url = str(request.organizer.settings.withdrawal_custom_url).format(
+            event=request.event.slug if hasattr(request, "event") else "",
+            organizer=request.organizer.slug,
+        )
     return {
         "label": request.organizer.settings.withdrawal_label,
         "url": url,
@@ -125,6 +130,13 @@ def nav_event_receiver(sender, request, **kwargs):
         }
     ]
 
+
+settings_hierarkey.add_default("withdrawal_use_custom", default_type=bool, value=False)
+settings_hierarkey.add_default(
+    "withdrawal_custom_url",
+    LazyI18nString(""),
+    LazyI18nString,
+)
 
 settings_hierarkey.add_default("withdrawal_contact_mail", default_type=str, value=None)
 settings_hierarkey.add_default(
