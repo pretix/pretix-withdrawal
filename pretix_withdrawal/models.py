@@ -196,7 +196,7 @@ class Withdrawal(LoggedModel):
         # see pretix.base.services.notifications.send_notification_mail
         # TODO: allow organizer-level notifications
 
-        if self.event:
+        if self.event and "pretix_withdrawal" in self.event.plugins:
             url = build_absolute_uri(
                 self.event,
                 "plugins:pretix_withdrawal:control.event.view",
