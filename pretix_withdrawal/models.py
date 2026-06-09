@@ -253,7 +253,7 @@ class Withdrawal(LoggedModel):
                 "plugins:pretix_withdrawal:control.organizer.settings",
                 kwargs={
                     "organizer": self.organizer.slug,
-                }
+                },
             ),
         }
         tpl_html = get_template("pretixbase/email/notification.html")
