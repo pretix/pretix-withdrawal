@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 from django.db.models import Q
 from django.urls import reverse
+from django.utils.text import format_lazy
 from django.utils.translation import gettext_lazy as _
 from i18nfield.forms import I18nFormField, I18nTextarea, I18nTextInput
 from pretix.base.forms import (
@@ -63,6 +64,9 @@ class OrganizerSettingsForm(SettingsForm):
         required=False,
         widget=I18nTextInput,
         max_length=200,
+        help_text=_(
+            "You can use your own withdrawal form. The link in the footer will redirect to the provided URL."
+        ),
     )
 
     withdrawal_contact_mail = forms.CharField(
@@ -142,12 +146,16 @@ class OrganizerSettingsForm(SettingsForm):
             "data-inverse": "",
         }
 
-        phs = ["{event}", "{organizer}"]
+        phs_empty = "{code}, {email}"
+        phs = ["{event}", "{organizer}", "{code}", "{email}"]
         phs_str = ", ".join(phs)
         self.fields["withdrawal_custom_url"].validators = [PlaceholderValidator(phs)]
-        self.fields["withdrawal_custom_url"].help_text = _(
-            "You can use your own withdrawal form. The link in the footer will redirect to the provided URL. Available placeholders: {list}"
-        ).format(list=phs_str)
+        self.fields["withdrawal_custom_url"].help_text = format_lazy(
+            "{} {}. {}",
+            self.fields["withdrawal_custom_url"].help_text,
+            _("Available placeholders: {list}").format(list=phs_str),
+            _("Note that {empty} can be empty.").format(empty=phs_empty),
+        )
 
         phs = ["{email}", "{code}"]
         phs_str = ", ".join(phs)
@@ -166,10 +174,10 @@ class OrganizerSettingsForm(SettingsForm):
         ].validators = [PlaceholderValidator(phs)]
         self.fields["withdrawal_received_mail_subject"].help_text = self.fields[
             "withdrawal_received_mail_body"
-        ].help_text = _(
-            "Available placeholders: {list}. Note that {empty} can be empty."
-        ).format(
-            list=phs_str, empty=phs_empty
+        ].help_text = format_lazy(
+            "{}. {}",
+            _("Available placeholders: {list}").format(list=phs_str),
+            _("Note that {empty} can be empty.").format(empty=phs_empty),
         )
 
         phs = ["{code}", "{event}", "{organizer}"]

@@ -115,6 +115,11 @@ class WithdrawalCreate(CreateView):
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs["organizer"] = self.request.organizer
+        if self.request.method == "GET":
+            kwargs["initial"] = {
+                "order_code": self.request.GET.get("code", ""),
+                "email": self.request.GET.get("email", ""),
+            }
         return kwargs
 
     def form_invalid(self, form):

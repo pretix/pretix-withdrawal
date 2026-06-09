@@ -1,12 +1,16 @@
+import urllib.parse
 from django.dispatch import receiver
+from django.http import QueryDict
 from django.template.loader import get_template
 from django.urls import resolve, reverse
 from django.utils.translation import gettext_lazy as _, gettext_noop
 from i18nfield.strings import LazyI18nString
+from pretix.base.email import SimpleFunctionalMailTextPlaceholder
 from pretix.base.models import Event, Order
 from pretix.base.settings import settings_hierarkey
+from pretix.base.signals import register_mail_placeholders
 from pretix.control.signals import nav_event, nav_organizer, order_info
-from pretix.multidomain.urlreverse import eventreverse
+from pretix.multidomain.urlreverse import build_absolute_uri
 from pretix.presale.signals import global_footer_link
 
 
@@ -26,34 +30,56 @@ def on_control_order_info(sender: Event, request, order: Order, **kwargs):
     return template.render(ctx, request=request)
 
 
+def _withdrawal_url(organizer, event=None, order=None):
+    if organizer.settings.withdrawal_use_custom:
+        return str(organizer.settings.withdrawal_custom_url).format(
+            event=event.slug if event else "",
+            organizer=organizer.slug,
+            code=order.full_code if order else "",
+            email=urllib.parse.quote_plus(order.email) if order else "",
+        )
+
+    q = QueryDict(mutable=True)
+    if order:
+        q["code"] = order.full_code
+        q["email"] = order.email
+
+    return build_absolute_uri(
+        event or organizer,
+        "plugins:pretix_withdrawal:presale.{}.create".format(
+            "event" if event else "organizer"
+        ),
+    ) + ("?" + q.urlencode() if q else "")
+
+
 @receiver(global_footer_link, dispatch_uid="withdrawal_footer_link")
 def footer_link(sender, request=None, **kwargs):
-    if not request or not hasattr(request, "organizer") or not request.organizer:
+    if not request:
         return []
-    if hasattr(request, "event"):
-        if "pretix_withdrawal" not in request.event.plugins:
-            return []
-        url = eventreverse(
-            request.event,
-            "plugins:pretix_withdrawal:presale.event.create",
-        )
-    else:
-        if "pretix_withdrawal" not in request.organizer.plugins:
-            return []
-        url = eventreverse(
-            request.organizer,
-            "plugins:pretix_withdrawal:presale.organizer.create",
-        )
-    if request.organizer.settings.withdrawal_use_custom:
-        url = str(request.organizer.settings.withdrawal_custom_url).format(
-            event=request.event.slug if hasattr(request, "event") else "",
-            organizer=request.organizer.slug,
-        )
+
+    organizer = getattr(request, "organizer", None)
+    event = getattr(request, "event", None)
+
+    if not organizer or "pretix_withdrawal" not in (event or organizer).plugins:
+        return []
+
     return {
         "label": request.organizer.settings.withdrawal_label,
-        "url": url,
+        "url": _withdrawal_url(organizer, event),
         "cssclass": "btn btn-primary btn-xs",
     }
+
+
+@receiver(register_mail_placeholders, dispatch_uid="pretix_withdrawal_placeholders")
+def register_placeholders(sender, **kwargs):
+    return [
+        SimpleFunctionalMailTextPlaceholder(
+            "withdrawal_url",
+            ["order", "event"],
+            lambda order, event: _withdrawal_url(event.organizer, event, order),
+            lambda event: _withdrawal_url(event.organizer, event),
+        ),
+    ]
 
 
 @receiver(nav_organizer, dispatch_uid="pretix_withdrawal_organizer_nav_settings")

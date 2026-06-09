@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-08 12:56+0200\n"
+"POT-Creation-Date: 2026-06-09 12:42+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: pretix team\n"
 "Language-Team: \n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: pretix_withdrawal/apps.py:17 pretix_withdrawal/apps.py:29
-#: pretix_withdrawal/apps.py:34 pretix_withdrawal/signals.py:69
+#: pretix_withdrawal/apps.py:34 pretix_withdrawal/signals.py:95
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:7
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:10
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:8
@@ -36,26 +36,34 @@ msgid "Orders"
 msgstr "Bestellungen"
 
 #: pretix_withdrawal/apps.py:41 pretix_withdrawal/apps.py:46
-#: pretix_withdrawal/signals.py:92 pretix_withdrawal/signals.py:114
+#: pretix_withdrawal/signals.py:118 pretix_withdrawal/signals.py:140
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:7
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:10
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:7
 msgid "Withdrawals"
 msgstr "Widerrufe"
 
-#: pretix_withdrawal/forms.py:58
+#: pretix_withdrawal/forms.py:59
 msgid "Redirect to your own withdrawal form"
 msgstr "Verwende ein eigenes Widerrufsmanagement"
 
-#: pretix_withdrawal/forms.py:62
+#: pretix_withdrawal/forms.py:63
 msgid "Redirect to"
 msgstr "Umleitung auf"
 
-#: pretix_withdrawal/forms.py:69
+#: pretix_withdrawal/forms.py:68
+msgid ""
+"You can use your own withdrawal form. The link in the footer will redirect "
+"to the provided URL."
+msgstr ""
+"Du kannst Dein eigenes Widerrufsformular verwenden. Der Link in der Fußzeile "
+"zeigt dann auf die angegebene URL."
+
+#: pretix_withdrawal/forms.py:73
 msgid "Email address"
 msgstr "E-Mail-Adresse"
 
-#: pretix_withdrawal/forms.py:73
+#: pretix_withdrawal/forms.py:77
 msgid ""
 "If we receive a withdrawal, we will notify you on this email address. You "
 "can specify multiple recipients separated by commas."
@@ -63,97 +71,89 @@ msgstr ""
 "Sobald ein Widerruf eingeht, schicken wir eine Benachrichtigung an diese E-"
 "Mail-Adresse. Du kannst mehrere Adressen mit Komma getrennt angeben."
 
-#: pretix_withdrawal/forms.py:78
+#: pretix_withdrawal/forms.py:82
 msgid "Label"
 msgstr "Beschriftung"
 
-#: pretix_withdrawal/forms.py:82
+#: pretix_withdrawal/forms.py:86
 msgid ""
 "Used for the link in the footer and as the headline on the withdrawal form."
 msgstr ""
 "Wird für den Link in der Fußzeile und als Überschrift über dem "
 "Widerrufsformular verwendet."
 
-#: pretix_withdrawal/forms.py:86
+#: pretix_withdrawal/forms.py:90
 msgid "Message shown above the form"
 msgstr "Text über dem Formular"
 
-#: pretix_withdrawal/forms.py:92
+#: pretix_withdrawal/forms.py:96
 msgid "Help-text shown below the message input field"
 msgstr "Hilfetext unter dem Nachrichten-Eingabefeld"
 
-#: pretix_withdrawal/forms.py:98
+#: pretix_withdrawal/forms.py:102
 msgid "Label of the submit button"
 msgstr "Beschriftung des Buttons zum Abschicken"
 
-#: pretix_withdrawal/forms.py:103
+#: pretix_withdrawal/forms.py:107
 msgid "Message shown after successful submission"
 msgstr "Meldung nach dem erfolgreichen Absenden"
 
-#: pretix_withdrawal/forms.py:109 pretix_withdrawal/forms.py:121
+#: pretix_withdrawal/forms.py:113 pretix_withdrawal/forms.py:125
 msgid "Subject"
 msgstr "Betreff"
 
-#: pretix_withdrawal/forms.py:115 pretix_withdrawal/forms.py:127
+#: pretix_withdrawal/forms.py:119 pretix_withdrawal/forms.py:131
 msgid "Body"
 msgstr "Inhalt"
 
-#: pretix_withdrawal/forms.py:151
-#, python-brace-format
-msgid ""
-"You can use your own withdrawal form. The link in the footer will redirect "
-"to the provided URL. Available placeholders: {list}"
-msgstr ""
-"Du kannst Dein eigenes Widerrufsformular verwenden. Der Link in der Fußzeile "
-"zeigt dann auf die angegebene URL. Verfügbare Platzhalter: {list}"
-
-#: pretix_withdrawal/forms.py:160 pretix_withdrawal/forms.py:184
+#: pretix_withdrawal/forms.py:156 pretix_withdrawal/forms.py:166
+#: pretix_withdrawal/forms.py:179 pretix_withdrawal/forms.py:190
 #, python-brace-format
 msgid "Available placeholders: {list}"
 msgstr "Verfügbare Platzhalter: {list}"
 
-#: pretix_withdrawal/forms.py:172
+#: pretix_withdrawal/forms.py:157 pretix_withdrawal/forms.py:180
 #, python-brace-format
-msgid "Available placeholders: {list}. Note that {empty} can be empty."
-msgstr "Verfügbare Platzhalter: {list}. Beachte, dass {empty} leer sein kann."
+msgid "Note that {empty} can be empty."
+msgstr "Beachte, dass {empty} leer sein kann."
 
-#: pretix_withdrawal/forms.py:206
+#: pretix_withdrawal/forms.py:200 pretix_withdrawal/forms.py:219
 msgid "This field is required."
 msgstr "Dieses Feld ist erforderlich."
 
-#: pretix_withdrawal/forms.py:214 pretix_withdrawal/forms.py:217
+#: pretix_withdrawal/forms.py:227 pretix_withdrawal/forms.py:230
 msgid "Search for…"
 msgstr "Suche nach …"
 
-#: pretix_withdrawal/forms.py:223
+#: pretix_withdrawal/forms.py:236
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:90
 msgid "Status"
 msgstr "Status"
 
-#: pretix_withdrawal/forms.py:225
+#: pretix_withdrawal/forms.py:238
 msgid "All withdrawals"
 msgstr "Alle Widerrufe"
 
-#: pretix_withdrawal/forms.py:226
+#: pretix_withdrawal/forms.py:239
 msgid "settled"
 msgstr "erledigt"
 
-#: pretix_withdrawal/forms.py:227
+#: pretix_withdrawal/forms.py:240
 msgid "not settled"
 msgstr "nicht erledigt"
 
-#: pretix_withdrawal/forms.py:292 pretix_withdrawal/models.py:246
+#: pretix_withdrawal/forms.py:305 pretix_withdrawal/models.py:246
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:74
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:81
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:75
 msgid "Event"
 msgstr "Veranstaltung"
 
-#: pretix_withdrawal/forms.py:304 pretix_withdrawal/forms.py:307
+#: pretix_withdrawal/forms.py:317 pretix_withdrawal/forms.py:320
 msgid "All events"
 msgstr "Alle Veranstaltungen"
 
-#: pretix_withdrawal/forms.py:308
+#: pretix_withdrawal/forms.py:321
 msgid "No event"
 msgstr "Keine Veranstaltung"
 
@@ -246,20 +246,20 @@ msgstr "Bestellung ansehen"
 msgid "Order (code unknown)"
 msgstr "Bestellnummer (unbekannt)"
 
-#: pretix_withdrawal/signals.py:144
+#: pretix_withdrawal/signals.py:170
 msgid "Withdraw from contract"
 msgstr "Vertrag widerrufen"
 
-#: pretix_withdrawal/signals.py:150
+#: pretix_withdrawal/signals.py:176
 msgid "Confirm withdrawal"
 msgstr "Widerruf bestätigen"
 
-#: pretix_withdrawal/signals.py:156
+#: pretix_withdrawal/signals.py:182
 msgid "Please fill out the form below to withdraw from your order."
 msgstr ""
 "Bitte fülle das untenstehende Formular aus, um Deinen Vertrag zu widerrufen."
 
-#: pretix_withdrawal/signals.py:164
+#: pretix_withdrawal/signals.py:190
 msgid ""
 "Do you want to withdraw part of your order? Please specify here which items "
 "you want to cancel."
@@ -267,7 +267,7 @@ msgstr ""
 "Willst Du nur einen Teil Deiner Bestellung widerrufen? Gib bitte hier an, "
 "welche Positionen Du widerrufen möchtest."
 
-#: pretix_withdrawal/signals.py:174
+#: pretix_withdrawal/signals.py:200
 #, python-brace-format
 msgid ""
 "We received your withdrawal. We will send an email to {email} to acknowledge "
@@ -281,11 +281,11 @@ msgstr ""
 "separaten Schritt durch unseren Kundenservice. Wir werden uns in Kürze bei "
 "Dir melden."
 
-#: pretix_withdrawal/signals.py:184
+#: pretix_withdrawal/signals.py:210
 msgid "Your withdrawal"
 msgstr "Dein Widerruf"
 
-#: pretix_withdrawal/signals.py:191
+#: pretix_withdrawal/signals.py:217
 #, python-brace-format
 msgid ""
 "Hello,\n"
@@ -325,11 +325,11 @@ msgstr ""
 "Viele Grüße,  \n"
 "Das {organizer} Team"
 
-#: pretix_withdrawal/signals.py:210
+#: pretix_withdrawal/signals.py:236
 msgid "We received a withdrawal for your order"
 msgstr "Wir haben einen Widerruf für Deine Bestellung erhalten"
 
-#: pretix_withdrawal/signals.py:218
+#: pretix_withdrawal/signals.py:244
 #, python-brace-format
 msgid ""
 "Hello,\n"
@@ -565,24 +565,24 @@ msgstr "Abbrechen"
 msgid "Yes, mark as settled"
 msgstr "Ja, als erledigt markieren"
 
-#: pretix_withdrawal/views.py:122
+#: pretix_withdrawal/views.py:127
 msgid "We could not save your changes. See below for details."
 msgstr ""
 "Wir konnten Deine Änderungen nicht speichern. Die fehlerhaften Felder sind "
 "farblich markiert."
 
-#: pretix_withdrawal/views.py:302
+#: pretix_withdrawal/views.py:307
 msgid "The comment has been updated."
 msgstr "Der Kommentar wurde aktualisiert."
 
-#: pretix_withdrawal/views.py:304
+#: pretix_withdrawal/views.py:309
 msgid "Could not update the comment."
 msgstr "Kommentar konnte nicht gespeichert werden."
 
-#: pretix_withdrawal/views.py:322
+#: pretix_withdrawal/views.py:327
 msgid "You do not have permission to view this content."
 msgstr "Du hast nicht die nötigen Berechtigungen, diesen Inhalt zu sehen."
 
-#: pretix_withdrawal/views.py:390
+#: pretix_withdrawal/views.py:395
 msgid "The withdrawal is settled."
 msgstr "Der Widerruf ist erledigt."
