@@ -10,6 +10,7 @@ from pretix.base.models import Event, Order
 from pretix.base.settings import settings_hierarkey
 from pretix.base.signals import register_mail_placeholders
 from pretix.control.signals import nav_event, nav_organizer, order_info
+from pretix.helpers.format import format_map
 from pretix.multidomain.urlreverse import build_absolute_uri
 from pretix.presale.signals import global_footer_link
 
@@ -32,11 +33,14 @@ def on_control_order_info(sender: Event, request, order: Order, **kwargs):
 
 def _withdrawal_url(organizer, event=None, order=None):
     if organizer.settings.withdrawal_use_custom:
-        return str(organizer.settings.withdrawal_custom_url).format(
-            event=event.slug if event else "",
-            organizer=organizer.slug,
-            code=order.full_code if order else "",
-            email=urllib.parse.quote_plus(order.email) if order else "",
+        return format_map(
+            organizer.settings.withdrawal_custom_url,
+            {
+                "event": event.slug if event else "",
+                "organizer": organizer.slug,
+                "code": order.full_code if order else "",
+                "email": urllib.parse.quote_plus(order.email) if order else "",
+            },
         )
 
     q = QueryDict(mutable=True)
