@@ -76,8 +76,6 @@ def footer_link(sender, request=None, **kwargs):
 
 @receiver(register_mail_placeholders, dispatch_uid="pretix_withdrawal_placeholders")
 def register_placeholders(sender, **kwargs):
-    if "pretix_withdrawal" not in sender.plugins:
-        return []
     return [
         SimpleFunctionalMailTextPlaceholder(
             "withdrawal_url",
