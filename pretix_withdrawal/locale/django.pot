@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-09 12:42+0200\n"
+"POT-Creation-Date: 2026-06-15 08:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: pretix_withdrawal/apps.py:17 pretix_withdrawal/apps.py:29
-#: pretix_withdrawal/apps.py:34 pretix_withdrawal/signals.py:95
+#: pretix_withdrawal/apps.py:34 pretix_withdrawal/signals.py:99
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:7
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:10
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:8
@@ -40,7 +40,7 @@ msgid "Orders"
 msgstr ""
 
 #: pretix_withdrawal/apps.py:41 pretix_withdrawal/apps.py:46
-#: pretix_withdrawal/signals.py:118 pretix_withdrawal/signals.py:140
+#: pretix_withdrawal/signals.py:122 pretix_withdrawal/signals.py:144
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:7
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:10
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:7
@@ -140,7 +140,7 @@ msgstr ""
 msgid "not settled"
 msgstr ""
 
-#: pretix_withdrawal/forms.py:305 pretix_withdrawal/models.py:246
+#: pretix_withdrawal/forms.py:305 pretix_withdrawal/models.py:243
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:74
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:81
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:75
@@ -184,7 +184,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: pretix_withdrawal/models.py:95 pretix_withdrawal/models.py:248
+#: pretix_withdrawal/models.py:95 pretix_withdrawal/models.py:245
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:111
 #: pretix_withdrawal/templates/pretix_withdrawal/control/order_info.html:42
 msgid "Message"
@@ -210,53 +210,53 @@ msgstr ""
 msgid "Internal comment"
 msgstr ""
 
-#: pretix_withdrawal/models.py:221
+#: pretix_withdrawal/models.py:219
 #, python-brace-format
 msgid "Withdrawal for {order}"
 msgstr ""
 
-#: pretix_withdrawal/models.py:224
+#: pretix_withdrawal/models.py:222
 msgid "View withdrawal"
 msgstr ""
 
-#: pretix_withdrawal/models.py:226
+#: pretix_withdrawal/models.py:224
 msgid "From"
 msgstr ""
 
-#: pretix_withdrawal/models.py:229
+#: pretix_withdrawal/models.py:227
 #: pretix_withdrawal/templates/pretix_withdrawal/control/detail.html:37
 #: pretix_withdrawal/templates/pretix_withdrawal/control/list.html:76
 #: pretix_withdrawal/templates/pretix_withdrawal/control/settle.html:38
 msgid "Order"
 msgstr ""
 
-#: pretix_withdrawal/models.py:231
+#: pretix_withdrawal/models.py:229
 msgid "View order"
 msgstr ""
 
-#: pretix_withdrawal/models.py:243
+#: pretix_withdrawal/models.py:240
 msgid "Order (code unknown)"
 msgstr ""
 
-#: pretix_withdrawal/signals.py:170
+#: pretix_withdrawal/signals.py:174
 msgid "Withdraw from contract"
 msgstr ""
 
-#: pretix_withdrawal/signals.py:176
+#: pretix_withdrawal/signals.py:180
 msgid "Confirm withdrawal"
 msgstr ""
 
-#: pretix_withdrawal/signals.py:182
+#: pretix_withdrawal/signals.py:186
 msgid "Please fill out the form below to withdraw from your order."
 msgstr ""
 
-#: pretix_withdrawal/signals.py:190
+#: pretix_withdrawal/signals.py:194
 msgid ""
 "Do you want to withdraw part of your order? Please specify here which items "
 "you want to cancel."
 msgstr ""
 
-#: pretix_withdrawal/signals.py:200
+#: pretix_withdrawal/signals.py:204
 #, python-brace-format
 msgid ""
 "We received your withdrawal. We will send an email to {email} to acknowledge "
@@ -265,11 +265,11 @@ msgid ""
 "back to you shortly."
 msgstr ""
 
-#: pretix_withdrawal/signals.py:210
+#: pretix_withdrawal/signals.py:214
 msgid "Your withdrawal"
 msgstr ""
 
-#: pretix_withdrawal/signals.py:217
+#: pretix_withdrawal/signals.py:221
 #, python-brace-format
 msgid ""
 "Hello,\n"
@@ -291,11 +291,11 @@ msgid ""
 "Your {organizer} team"
 msgstr ""
 
-#: pretix_withdrawal/signals.py:236
+#: pretix_withdrawal/signals.py:240
 msgid "We received a withdrawal for your order"
 msgstr ""
 
-#: pretix_withdrawal/signals.py:244
+#: pretix_withdrawal/signals.py:248
 #, python-brace-format
 msgid ""
 "Hello,\n"
@@ -500,22 +500,22 @@ msgstr ""
 msgid "Yes, mark as settled"
 msgstr ""
 
-#: pretix_withdrawal/views.py:127
+#: pretix_withdrawal/views.py:122
 msgid "We could not save your changes. See below for details."
 msgstr ""
 
-#: pretix_withdrawal/views.py:307
+#: pretix_withdrawal/views.py:302
 msgid "The comment has been updated."
 msgstr ""
 
-#: pretix_withdrawal/views.py:309
+#: pretix_withdrawal/views.py:304
 msgid "Could not update the comment."
 msgstr ""
 
-#: pretix_withdrawal/views.py:327
+#: pretix_withdrawal/views.py:322
 msgid "You do not have permission to view this content."
 msgstr ""
 
-#: pretix_withdrawal/views.py:395
+#: pretix_withdrawal/views.py:390
 msgid "The withdrawal is settled."
 msgstr ""
