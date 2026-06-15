@@ -20,7 +20,7 @@ from pretix.base.services.mail import (
     render_mail,
 )
 from pretix.helpers.format import format_map
-from pretix.multidomain.urlreverse import build_absolute_uri
+from pretix.helpers.urls import build_absolute_uri
 
 try:
     # pretix pre 2026.05 do not have NoUrlValidator yet
@@ -196,9 +196,8 @@ class Withdrawal(LoggedModel):
         # see pretix.base.services.notifications.send_notification_mail
         # TODO: allow organizer-level notifications
 
-        if self.event:
+        if self.event and "pretix_withdrawal" in self.event.plugins:
             url = build_absolute_uri(
-                self.event,
                 "plugins:pretix_withdrawal:control.event.view",
                 kwargs={
                     "organizer": self.organizer.slug,
@@ -208,7 +207,6 @@ class Withdrawal(LoggedModel):
             )
         else:
             url = build_absolute_uri(
-                self.organizer,
                 "plugins:pretix_withdrawal:control.organizer.view",
                 kwargs={
                     "organizer": self.organizer.slug,
@@ -230,7 +228,6 @@ class Withdrawal(LoggedModel):
             notification.add_action(
                 _("View order"),
                 build_absolute_uri(
-                    self.event,
                     "control:event.order",
                     kwargs={
                         "organizer": self.organizer.slug,
@@ -253,8 +250,10 @@ class Withdrawal(LoggedModel):
             "color": settings.PRETIX_PRIMARY_COLOR,
             "notification": notification,
             "settings_url": build_absolute_uri(
-                self.organizer,
                 "plugins:pretix_withdrawal:control.organizer.settings",
+                kwargs={
+                    "organizer": self.organizer.slug,
+                },
             ),
         }
         tpl_html = get_template("pretixbase/email/notification.html")
