@@ -134,6 +134,34 @@ class OrganizerSettingsForm(SettingsForm):
         widget_kwargs={"attrs": {"rows": "12"}},
     )
 
+    withdrawal_policy_label = I18nFormField(
+        label=_("Label"),
+        required=True,
+        widget=I18nTextInput,
+        help_text=_(
+            "This text will be used as a label for a link in the footer as well as the title for the policy page provided by pretix. Leave empty for no link."
+        ),
+        #widget_kwargs={"attrs": {"placeholder": _("e.g. Cancellation policy")}},
+    )
+    withdrawal_policy_url = I18nFormField(
+        label=_("URL"),
+        required=True,
+        widget=I18nTextInput,
+        help_text=_(
+            "This should point e.g. to a part of your website that explains your cancelation policy. "
+            "Instead of an URL, you can also configure a text that will be shown within pretix. This will be ignored if a URL is configured."
+        ),
+    )
+    withdrawal_policy_text = I18nFormField(
+        label=_("Text"),
+        required=True,
+        widget=I18nTextarea,
+        widget_kwargs={"attrs": {"rows": "10"}},
+        help_text=_(
+            "This will be ignored if a URL is configured."
+        ),
+    )
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.organizer = kwargs.pop("obj")

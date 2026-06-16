@@ -254,3 +254,19 @@ settings_hierarkey.add_default(
     ),
     LazyI18nString,
 )
+
+settings_hierarkey.add_default(
+    "withdrawal_policy_label",
+    LazyI18nString(""),
+    LazyI18nString,
+)
+settings_hierarkey.add_default(
+    "withdrawal_policy_url",
+    LazyI18nString(""),
+    LazyI18nString,
+)
+settings_hierarkey.add_default(
+    "withdrawal_policy_text",
+    LazyI18nString(""),
+    LazyI18nString,
+)
