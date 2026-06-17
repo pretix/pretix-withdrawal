@@ -12,7 +12,7 @@ from pretix.base.signals import register_mail_placeholders
 from pretix.control.signals import nav_event, nav_organizer, order_info
 from pretix.helpers.format import format_map
 from pretix.multidomain.urlreverse import build_absolute_uri
-from pretix.presale.signals import global_footer_link
+from pretix.presale.signals import checkout_confirm_messages, global_footer_link
 
 
 @receiver(order_info, dispatch_uid="withdrawal_control_order_info")
@@ -100,6 +100,18 @@ def footer_link(sender, request=None, **kwargs):
     )
 
     return links
+
+
+@receiver(checkout_confirm_messages, dispatch_uid="withdrawal_confirm_messages")
+def confirm_messages(sender, *args, **kwargs):
+    attr = " href=\"{url}\" target=\"_blank\"".format(
+        url=_withdrawal_policy_url(sender.organizer, sender)
+    )
+    return {
+        "withdrawal_policy": _(
+            "I have read and agree with the contents of the <a{attr}>cancellation policy</a>."
+        ).format(attr=attr)
+    }
 
 
 @receiver(register_mail_placeholders, dispatch_uid="pretix_withdrawal_placeholders")
