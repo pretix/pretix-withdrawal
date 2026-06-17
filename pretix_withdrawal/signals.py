@@ -104,7 +104,7 @@ def footer_link(sender, request=None, **kwargs):
 
 @receiver(checkout_confirm_messages, dispatch_uid="withdrawal_confirm_messages")
 def confirm_messages(sender, *args, **kwargs):
-    attr = " href=\"{url}\" target=\"_blank\"".format(
+    attr = ' href="{url}" target="_blank"'.format(
         url=_withdrawal_policy_url(sender.organizer, sender)
     )
     return {
