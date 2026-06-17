@@ -1,0 +1,11 @@
+{% extends basetemplate %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block title %}{{ headline }}{% endblock %}
+{% block content %}
+
+    <h2>{{ headline }}</h2>
+    {{ content }}
+    <p>&nbsp;</p>
+{% endblock %}
