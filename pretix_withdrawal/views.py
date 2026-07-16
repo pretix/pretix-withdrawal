@@ -179,6 +179,8 @@ class WithdrawalListViewAbstract(PaginationMixin, ListView):
 class OrganizerWithdrawalPermissionMixin:
     @cached_property
     def events_without_permission_exist(self):
+        if self.request.user.has_active_staff_session(self.request.session.session_key):
+            return False
         return self.request.organizer.events.filter(
             ~Exists(
                 self.request.user.teams.with_event_permission(
@@ -213,12 +215,7 @@ class OrganizerWithdrawalListView(
             "order",
         )
 
-        if (
-            not self.request.user.has_active_staff_session(
-                self.request.session.session_key
-            )
-            and self.events_without_permission_exist
-        ):
+        if self.events_without_permission_exist:
             # user does not have access to all events: limit withdrawals to events
             # the user can event.orders:read only. Do not show unassigned withdrawals!
             qs = qs.filter(

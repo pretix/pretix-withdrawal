@@ -13,6 +13,7 @@ from pretix.base.forms import (
     SettingsForm,
 )
 from pretix.base.models.organizer import TeamQuerySet
+from pretix.base.templatetags.rich_text import rich_text
 from pretix.base.validators import multimail_validate
 from pretix.control.forms.filter import FilterForm
 from pretix.control.forms.widgets import Select2
@@ -49,7 +50,7 @@ class CreateForm(I18nModelForm):
     def __init__(self, *args, **kwargs):
         organizer = kwargs.pop("organizer")
         super().__init__(*args, **kwargs)
-        self.fields["message"].help_text = (
+        self.fields["message"].help_text = rich_text(
             organizer.settings.withdrawal_form_message_help_text
         )
 
