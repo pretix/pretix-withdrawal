@@ -28,8 +28,24 @@ except ImportError:
     pass
 
 
+class HoneypotField(forms.URLField):
+    default_error_messages = {"invalid": _("Leave this field empty.")}
+
+    def __init__(self, **kwargs):
+        kwargs["required"] = False
+        kwargs.setdefault("help_text", _("Leave this field empty."))
+        super().__init__(**kwargs)
+
+    def clean(self, value):
+        cleaned = super().clean(value)
+        if cleaned:
+            raise ValidationError(self.error_messages["invalid"])
+
+
 class CreateForm(I18nModelForm):
     required_css_class = "required"
+
+    url = HoneypotField()
 
     class Meta:
         model = Withdrawal
