@@ -12,6 +12,7 @@ from django.views.generic import CreateView, DetailView, ListView, TemplateView
 from pretix.base.i18n import get_language_without_region
 from pretix.base.models import Order
 from pretix.base.models.organizer import TeamQuerySet
+from pretix.base.templatetags.rich_text import rich_text
 from pretix.control.permissions import (
     EventPermissionRequiredMixin,
 )
@@ -32,6 +33,23 @@ from .forms import (
 )
 from .models import Withdrawal
 from .signals import _withdrawal_url
+
+
+class WithdrawalPolicy(TemplateView):
+    template_name = "pretix_withdrawal/presale_policy.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data()
+        if hasattr(self.request, "event"):
+            ctx["basetemplate"] = "pretixpresale/event/base.html"
+        else:
+            ctx["basetemplate"] = "pretixpresale/organizers/base.html"
+
+        ctx["headline"] = self.request.organizer.settings.withdrawal_policy_label
+        ctx["content"] = rich_text(
+            str(self.request.organizer.settings.withdrawal_policy_text)
+        )
+        return ctx
 
 
 class WithdrawalCreate(CreateView):

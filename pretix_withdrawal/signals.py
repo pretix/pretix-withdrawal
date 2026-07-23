@@ -12,7 +12,7 @@ from pretix.base.signals import register_mail_placeholders
 from pretix.control.signals import nav_event, nav_organizer, order_info
 from pretix.helpers.format import format_map
 from pretix.multidomain.urlreverse import build_absolute_uri
-from pretix.presale.signals import global_footer_link
+from pretix.presale.signals import checkout_confirm_messages, global_footer_link
 
 
 @receiver(order_info, dispatch_uid="withdrawal_control_order_info")
@@ -56,6 +56,23 @@ def _withdrawal_url(organizer, event=None, order=None):
     ) + ("?" + q.urlencode() if q else "")
 
 
+def _withdrawal_policy_url(organizer, event=None):
+    if organizer.settings.withdrawal_policy_url:
+        return format_map(
+            organizer.settings.withdrawal_policy_url,
+            {
+                "event": event.slug if event else "",
+                "organizer": organizer.slug,
+            },
+        )
+    return build_absolute_uri(
+        event or organizer,
+        "plugins:pretix_withdrawal:presale.{}.policy".format(
+            "event" if event else "organizer"
+        ),
+    )
+
+
 @receiver(global_footer_link, dispatch_uid="withdrawal_footer_link")
 def footer_link(sender, request=None, **kwargs):
     if not request:
@@ -66,11 +83,34 @@ def footer_link(sender, request=None, **kwargs):
 
     if not organizer or "pretix_withdrawal" not in (event or organizer).plugins:
         return []
+    links = []
+    if request.organizer.settings.withdrawal_policy_label:
+        links.append(
+            {
+                "label": request.organizer.settings.withdrawal_policy_label,
+                "url": _withdrawal_policy_url(organizer, event),
+            }
+        )
+    links.append(
+        {
+            "label": request.organizer.settings.withdrawal_label,
+            "url": _withdrawal_url(organizer, event),
+            "cssclass": "btn btn-primary btn-xs",
+        }
+    )
 
+    return links
+
+
+@receiver(checkout_confirm_messages, dispatch_uid="withdrawal_confirm_messages")
+def confirm_messages(sender, *args, **kwargs):
+    attr = ' href="{url}" target="_blank"'.format(
+        url=_withdrawal_policy_url(sender.organizer, sender)
+    )
     return {
-        "label": request.organizer.settings.withdrawal_label,
-        "url": _withdrawal_url(organizer, event),
-        "cssclass": "btn btn-primary btn-xs",
+        "withdrawal_policy": _(
+            "I have read and agree with the contents of the <a{attr}>cancellation policy</a>."
+        ).format(attr=attr)
     }
 
 
@@ -82,6 +122,12 @@ def register_placeholders(sender, **kwargs):
             ["order", "event"],
             lambda order, event: _withdrawal_url(event.organizer, event, order),
             lambda event: _withdrawal_url(event.organizer, event),
+        ),
+        SimpleFunctionalMailTextPlaceholder(
+            "withdrawal_policy_url",
+            ["event"],
+            lambda event: _withdrawal_policy_url(event.organizer, event),
+            lambda event: _withdrawal_policy_url(event.organizer, event),
         ),
     ]
 
@@ -252,5 +298,21 @@ settings_hierarkey.add_default(
             "Your {organizer} team"
         )
     ),
+    LazyI18nString,
+)
+
+settings_hierarkey.add_default(
+    "withdrawal_policy_label",
+    LazyI18nString(""),
+    LazyI18nString,
+)
+settings_hierarkey.add_default(
+    "withdrawal_policy_url",
+    LazyI18nString(""),
+    LazyI18nString,
+)
+settings_hierarkey.add_default(
+    "withdrawal_policy_text",
+    LazyI18nString(""),
     LazyI18nString,
 )
