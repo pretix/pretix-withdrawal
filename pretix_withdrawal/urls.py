@@ -50,7 +50,17 @@ organizer_patterns = [
         views.WithdrawalCreate.as_view(),
         name="presale.organizer.create",
     ),
+    path(
+        "_cancellation_policy/",
+        views.WithdrawalPolicy.as_view(),
+        name="presale.organizer.policy",
+    ),
 ]
 event_patterns = [
     path("withdraw/", views.WithdrawalCreate.as_view(), name="presale.event.create"),
+    path(
+        "cancellation_policy/",
+        views.WithdrawalPolicy.as_view(),
+        name="presale.event.policy",
+    ),
 ]
