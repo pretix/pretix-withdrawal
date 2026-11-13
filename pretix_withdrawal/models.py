@@ -216,6 +216,7 @@ class Withdrawal(LoggedModel):
 
         notification = Notification(
             event=self.event,
+            organizer=self.organizer,
             title=_("Withdrawal for {order}").format(order=self.order_code),
             url=url,
         )
