@@ -133,9 +133,9 @@ class WithdrawalCreate(CreateView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         if hasattr(self.request, "event"):
-            ctx["basetemplate"] = "pretixpresale/event/base.html"
+            ctx["basetpl"] = "pretixpresale/event/base.html"
         else:
-            ctx["basetemplate"] = "pretixpresale/organizers/base.html"
+            ctx["basetpl"] = "pretixpresale/organizers/base.html"
 
         ctx["headline"] = self.request.organizer.settings.withdrawal_label
         ctx["form_above_msg"] = (
@@ -239,7 +239,7 @@ class OrganizerWithdrawalListView(
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx["basetemplate"] = "pretixcontrol/organizers/base.html"
+        ctx["basetpl"] = "pretixcontrol/organizers/base.html"
         ctx["events_without_permission_exist"] = self.events_without_permission_exist
         return ctx
 
@@ -260,7 +260,7 @@ class EventWithdrawalListView(EventPermissionRequiredMixin, WithdrawalListViewAb
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx["basetemplate"] = "pretixcontrol/event/base.html"
+        ctx["basetpl"] = "pretixcontrol/event/base.html"
         return ctx
 
 
@@ -322,7 +322,7 @@ class OrganizerWithdrawalDetailView(
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx["basetemplate"] = "pretixcontrol/organizers/base.html"
+        ctx["basetpl"] = "pretixcontrol/organizers/base.html"
         return ctx
 
     def get_success_url(self):
@@ -350,7 +350,7 @@ class EventWithdrawalDetailView(
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx["basetemplate"] = "pretixcontrol/event/base.html"
+        ctx["basetpl"] = "pretixcontrol/event/base.html"
         return ctx
 
     def get_success_url(self):
@@ -371,7 +371,7 @@ class WithdrawalSettleMixin:
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx["basetemplate"] = self.basetemplate
+        ctx["basetpl"] = self.basetpl
         order = self.withdrawal.order
         ctx["warn_order_cancel"] = order and not (
             order.status == "c"
@@ -395,7 +395,7 @@ class WithdrawalSettleMixin:
 class OrganizerWithdrawalSettleView(
     WithdrawalSettleMixin, OrganizerWithdrawalDetailView
 ):
-    basetemplate = "pretixcontrol/organizers/base.html"
+    basetpl = "pretixcontrol/organizers/base.html"
 
     def get_success_url(self):
         return reverse(
@@ -408,7 +408,7 @@ class OrganizerWithdrawalSettleView(
 
 
 class EventWithdrawalSettleView(WithdrawalSettleMixin, EventWithdrawalDetailView):
-    basetemplate = "pretixcontrol/event/base.html"
+    basetpl = "pretixcontrol/event/base.html"
 
     def get_success_url(self):
         return reverse(
